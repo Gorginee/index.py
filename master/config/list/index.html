@@ -524,44 +524,13 @@
 <p><code>env</code> 是一个十分重要的配置，它允许<a href="../#_3">自动使用对应环境下的配置</a>。</p>
 <p>它将读取环境变量里 <code>INDEX_ENV</code> 的值，可以但不推荐在配置文件中指定。</p>
 <h3 id="debug">DEBUG</h3>
-<p><strong>默认值:</strong> <code>False</code></p>
+<p><strong>默认值:</strong> <code>True</code></p>
 <p>在环境变量里 <code>INDEX_DEBUG</code> 为 <code>"on"</code> 或者 <code>"True"</code> 时，<code>DEBUG</code> 为真；该值同样可以在配置文件中指定。</p>
 <h3 id="app">APP</h3>
 <p><strong>没有默认值</strong></p>
 <p><code>app</code> 允许自定义 <code>serve</code>/<code>gunicorn</code> 等命令中的默认 <code>app</code>。</p>
 <h3 id="log_level">LOG_LEVEL</h3>
 <p><strong>默认值:</strong> <code>"info"</code></p>
-<p><code>log_level</code> 有五个可用值, 下面是它与 <code>logging</code> 的等级对应表</p>
-<table>
-<thead>
-<tr>
-<th>log_level</th>
-<th>logging</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>"critical"</td>
-<td>logging.CRITICAL</td>
-</tr>
-<tr>
-<td>"error"</td>
-<td>logging.ERROR</td>
-</tr>
-<tr>
-<td>"warning"</td>
-<td>logging.WARNING</td>
-</tr>
-<tr>
-<td>"info"</td>
-<td>logging.INFO</td>
-</tr>
-<tr>
-<td>"debug"</td>
-<td>logging.DEBUG</td>
-</tr>
-</tbody>
-</table>
 <h3 id="host">HOST</h3>
 <p><strong>默认值:</strong> <code>"127.0.0.1"</code></p>
 <p><code>host</code> 指定 Index 监听的地址。</p>
