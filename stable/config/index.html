@@ -223,18 +223,102 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../http/" class="md-nav__link">
+      HTTP
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../websocket/" class="md-nav__link">
+      WebSocket
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../event/" class="md-nav__link">
+      Lifespan
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../middleware/" class="md-nav__link">
+      Middleware
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../openapi/" class="md-nav__link">
+      OpenAPI
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../background/" class="md-nav__link">
+      Background Task
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../command/" class="md-nav__link">
+      Command
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
-    <label class="md-nav__link" for="nav-4">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
+    <label class="md-nav__link" for="nav-11">
       Configuration
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Configuration" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
+      <label class="md-nav__title" for="nav-11">
         <span class="md-nav__icon md-icon"></span>
         Configuration
       </label>
@@ -318,90 +402,6 @@
   </li>
 
     
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../http/" class="md-nav__link">
-      HTTP
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../websocket/" class="md-nav__link">
-      WebSocket
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../event/" class="md-nav__link">
-      Lifespan
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../middleware/" class="md-nav__link">
-      Middleware
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../command/" class="md-nav__link">
-      Command
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../openapi/" class="md-nav__link">
-      OpenAPI
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../background/" class="md-nav__link">
-      Background Task
-    </a>
-  </li>
-
-    
   </ul>
 </nav>
                   </div>
@@ -463,13 +463,8 @@
                 
                   <h1>Introduction</h1>
                 
-                <p>Index 内置的配置类 <code>indexpy.config.Config</code> 是一个单例类，你可以在任何地方使用 <code>Config()</code>，它们都将返回同一个对象。</p>
-<p>所有配置都是大小写无关的，<code>Config().KEY</code> 等价于 <code>Config().Key</code> 和 <code>Config().key</code>。</p>
-<p>在 Index 启动时，它将自动从环境变量与项目根目录下 index.yaml / index.yml / index.json 里读取配置。</p>
-<div class="admonition notice">
-<p class="admonition-title">Notice</p>
-<p>在 Index 运行之后更改配置文件或者环境变量并不会触发 Index 的热更新，你只能通过重启来使用新配置启动 Index。</p>
-</div>
+                <p>Index 允许你使用配置文件来配置 <code>index-cli serve</code> / <code>index-cli gunicorn start</code> 等命令。在 Python 代码里，你可以使用 <code>indexpy.conf.serve_config</code> 读取配置，所有配置都是大小写无关的，<code>serve_config.KEY</code> 等价于 <code>serve_config.Key</code> 和 <code>serve_config.key</code>。</p>
+<p>在命令启动时，它将自动从环境变量与项目根目录下 <code>index.yaml</code> / <code>index.yml</code> / <code>index.json</code> 里读取配置。</p>
 <h2 id="_1">环境变量</h2>
 <p>Index 在启动时将从环境变量里读取 <code>INDEX_DEBUG</code> 和 <code>INDEX_ENV</code> 两个值.</p>
 <p><code>INDEX_DEBUG</code> 的值为 <code>True</code> 或者 <code>on</code> 则 <code>DEBUG</code> 为真，其他任何值都是假。</p>
@@ -482,10 +477,6 @@
 <div class="codehilite"><pre><span></span><code><span class="c1"># overwrite default value to this program</span>
 <span class="nt">app</span><span class="p">:</span> <span class="s">&quot;example:app&quot;</span>
 <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4918</span>
-<span class="nt">allowed_hosts</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;localhost&quot;</span><span class="p p-Indicator">]</span>
-<span class="nt">cors_allow_origins</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;*&quot;</span><span class="p p-Indicator">]</span>
-<span class="nt">cors_allow_methods</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;GET&quot;</span><span class="p p-Indicator">]</span>
-<span class="nt">cors_allow_credentials</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
 
 <span class="c1"># use in development</span>
 <span class="nt">dev</span><span class="p">:</span>
@@ -496,7 +487,7 @@
 <span class="c1"># use in production</span>
 <span class="nt">pro</span><span class="p">:</span>
   <span class="s">&quot;host&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;0.0.0.0&quot;</span>
-  <span class="s">&quot;port&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;41900&quot;</span>
+  <span class="s">&quot;port&quot;</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">41900</span>
   <span class="s">&quot;log_level&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;warning&quot;</span>
 
 <span class="c1"># use in test</span>
@@ -506,8 +497,8 @@
 
 <h2 id="_3">什么是配置隔离？</h2>
 <p>同一个项目，不同环境下的部分配置可能不同。Index 内置的配置允许使用 <code>ENV</code> 来指定当前使用的配置环境。</p>
-<p>以上面的配置文件为例，当 <code>ENV</code> 的值为 <code>"dev"</code> 时，<code>Config().DEBUG</code> 会为 <code>True</code>。</p>
-<p>当你指定 <code>ENV</code> 的值为 <code>"pro"</code> 时, 在使用 <code>Config().DEBUG</code> 的时候，它将先从 <code>"pro"</code> 中查找 <code>"debug"</code>（不分大小写）。当没有找到时，继续向上查找。然而这份配置文件并没有在根配置中指定 <code>"debug"</code>，所以 <code>Config().DEBUG</code> 会使用默认值 <code>False</code>。</p>
+<p>以上面的配置文件为例，当 <code>ENV</code> 的值为 <code>"dev"</code> 时，<code>serve_config.DEBUG</code> 会为 <code>True</code>。</p>
+<p>当你指定 <code>ENV</code> 的值为 <code>"pro"</code> 时, 在使用 <code>serve_config.DEBUG</code> 的时候，它将先从 <code>"pro"</code> 中查找 <code>"debug"</code>（不分大小写）。当没有找到时，继续向上查找。然而这份配置文件并没有在根配置中指定 <code>"debug"</code>，所以 <code>serve_config.DEBUG</code> 会使用默认值 <code>False</code>。</p>
 <p>其他的配置同理。</p>
                 
               
@@ -527,7 +518,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../route/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../command/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -536,7 +527,7 @@
                 <span class="md-footer-nav__direction">
                   上一页
                 </span>
-                Route
+                Command
               </div>
             </div>
           </a>
@@ -600,6 +591,10 @@
     
         <div class="version-select">
             <a href="/stable/config/">stable</a>
+        </div>
+    
+        <div class="version-select">
+            <a href="/0.15/config/">0.15</a>
         </div>
     
         <div class="version-select">
