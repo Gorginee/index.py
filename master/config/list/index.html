@@ -328,71 +328,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#allowed_hosts" class="md-nav__link">
-    ALLOWED_HOSTS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#force_ssl" class="md-nav__link">
-    FORCE_SSL
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#autoreload" class="md-nav__link">
     AUTORELOAD
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_allow_origins" class="md-nav__link">
-    CORS_ALLOW_ORIGINS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_allow_origin_regex" class="md-nav__link">
-    CORS_ALLOW_ORIGIN_REGEX
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_allow_methods" class="md-nav__link">
-    CORS_ALLOW_METHODS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_allow_headers" class="md-nav__link">
-    CORS_ALLOW_HEADERS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_allow_credentials" class="md-nav__link">
-    CORS_ALLOW_CREDENTIALS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_expose_headers" class="md-nav__link">
-    CORS_EXPOSE_HEADERS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_max_age" class="md-nav__link">
-    CORS_MAX_AGE
   </a>
   
 </li>
@@ -557,71 +494,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#allowed_hosts" class="md-nav__link">
-    ALLOWED_HOSTS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#force_ssl" class="md-nav__link">
-    FORCE_SSL
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#autoreload" class="md-nav__link">
     AUTORELOAD
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_allow_origins" class="md-nav__link">
-    CORS_ALLOW_ORIGINS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_allow_origin_regex" class="md-nav__link">
-    CORS_ALLOW_ORIGIN_REGEX
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_allow_methods" class="md-nav__link">
-    CORS_ALLOW_METHODS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_allow_headers" class="md-nav__link">
-    CORS_ALLOW_HEADERS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_allow_credentials" class="md-nav__link">
-    CORS_ALLOW_CREDENTIALS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_expose_headers" class="md-nav__link">
-    CORS_EXPOSE_HEADERS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cors_max_age" class="md-nav__link">
-    CORS_MAX_AGE
   </a>
   
 </li>
@@ -652,8 +526,6 @@
 <h3 id="debug">DEBUG</h3>
 <p><strong>默认值:</strong> <code>False</code></p>
 <p>在环境变量里 <code>INDEX_DEBUG</code> 为 <code>"on"</code> 或者 <code>"True"</code> 时，<code>DEBUG</code> 为真；该值同样可以在配置文件中指定。</p>
-<p>当 <code>DEBUG</code> 为真时，将详细的显示 <code>500</code> 错误信息。</p>
-<p><img alt="debug-page" src="../../img/debug-page.png" /></p>
 <h3 id="app">APP</h3>
 <p><strong>没有默认值</strong></p>
 <p><code>app</code> 允许自定义 <code>serve</code>/<code>gunicorn</code> 等命令中的默认 <code>app</code>。</p>
@@ -696,56 +568,9 @@
 <h3 id="port">PORT</h3>
 <p><strong>默认值:</strong> <code>4190</code></p>
 <p><code>port</code> 指定 Index 监听的端口。</p>
-<h3 id="allowed_hosts">ALLOWED_HOSTS</h3>
-<p><strong>默认值:</strong> <code>["*"]</code></p>
-<p><code>allowed_hosts</code> 用于指定 Index 允许被访问的 HOST。</p>
-<p>一些例子:</p>
-<ol>
-<li>
-<p><code>["*"]</code></p>
-<p>允许所有的 HOST 访问</p>
-</li>
-<li>
-<p><code>["example.com", "*example.com"]</code></p>
-<p>允许 example.com 以及 example.com 的子域名访问。</p>
-</li>
-<li>
-<p><code>["example.com", "test.com"]</code></p>
-<p>允许 example.com 与 test.com 的访问。</p>
-</li>
-</ol>
-<h3 id="force_ssl">FORCE_SSL</h3>
-<p><strong>默认值:</strong> <code>False</code></p>
-<p><code>force_ssl</code> 允许 HTTP/WS 强制跳转到 HTTPS/WSS。</p>
 <h3 id="autoreload">AUTORELOAD</h3>
 <p><strong>默认值:</strong> <code>True</code></p>
 <p><code>autoreload</code> 为真时，使用 <code>index-cli serve</code> 或 <code>index-cli gunicorn start</code> 时，将会监听当前的项目修改，自动重启服务。</p>
-<h3 id="cors_allow_origins">CORS_ALLOW_ORIGINS</h3>
-<p><strong>默认值:</strong> <code>()</code></p>
-<p>在跨域请求中允许的 ORIGIN 列表。</p>
-<p>例如： <code>['https://example.org', 'https://www.example.org']</code></p>
-<p>你可以使用 <code>['*']</code> 来允许所有的 ORIGIN 值。</p>
-<h3 id="cors_allow_origin_regex">CORS_ALLOW_ORIGIN_REGEX</h3>
-<p><strong>默认值:</strong> <code>None</code></p>
-<p>需要是一个正则表达式字符串，它将用于匹配在跨域请求中允许的 ORIGIN 。</p>
-<p>例如：<code>'https://.*\.example\.org'</code></p>
-<h3 id="cors_allow_methods">CORS_ALLOW_METHODS</h3>
-<p><strong>默认值:</strong> <code>("GET",)</code></p>
-<p>在跨域请求中允许的 HTTP 请求方法列表。</p>
-<p>你可以使用 <code>['*']</code> 来允许所有的请求方法。</p>
-<h3 id="cors_allow_headers">CORS_ALLOW_HEADERS</h3>
-<p><strong>默认值:</strong> <code>()</code></p>
-<p>在跨域请求中允许被使用的 header 列表。</p>
-<p>你可以使用 <code>['*']</code> 来允许所有的 header。<code>Accept</code>、<code>Accept-Language</code>、<code>Content-Language</code> 和 <code>Content-Type</code> 在跨域请求中是默认允许的。</p>
-<h3 id="cors_allow_credentials">CORS_ALLOW_CREDENTIALS</h3>
-<p><strong>默认值:</strong> <code>False</code></p>
-<p>允许在跨域请求中携带 cookies。</p>
-<h3 id="cors_expose_headers">CORS_EXPOSE_HEADERS</h3>
-<p><strong>默认值:</strong> <code>()</code></p>
-<p>指定可供浏览器访问的任何响应头。</p>
-<h3 id="cors_max_age">CORS_MAX_AGE</h3>
-<p><strong>默认值:</strong> <code>600</code></p>
-<p>设置浏览器缓存 CORS 响应的最长时间（单位：秒）。</p>
                 
               
               

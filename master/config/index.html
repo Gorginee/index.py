@@ -463,13 +463,8 @@
                 
                   <h1>Introduction</h1>
                 
-                <p>Index 内置的配置类 <code>indexpy.config.Config</code> 是一个单例类，你可以在任何地方使用 <code>Config()</code>，它们都将返回同一个对象。</p>
-<p>所有配置都是大小写无关的，<code>Config().KEY</code> 等价于 <code>Config().Key</code> 和 <code>Config().key</code>。</p>
-<p>在 Index 启动时，它将自动从环境变量与项目根目录下 index.yaml / index.yml / index.json 里读取配置。</p>
-<div class="admonition notice">
-<p class="admonition-title">Notice</p>
-<p>在 Index 运行之后更改配置文件或者环境变量并不会触发 Index 的热更新，你只能通过重启来使用新配置启动 Index。</p>
-</div>
+                <p>Index 允许你使用配置文件来配置 <code>index-cli serve</code> / <code>index-cli gunicorn start</code> 等命令。在 Python 代码里，你可以使用 <code>indexpy.conf.serve_config</code> 读取配置，所有配置都是大小写无关的，<code>serve_config.KEY</code> 等价于 <code>serve_config.Key</code> 和 <code>serve_config.key</code>。</p>
+<p>在命令启动时，它将自动从环境变量与项目根目录下 <code>index.yaml</code> / <code>index.yml</code> / <code>index.json</code> 里读取配置。</p>
 <h2 id="_1">环境变量</h2>
 <p>Index 在启动时将从环境变量里读取 <code>INDEX_DEBUG</code> 和 <code>INDEX_ENV</code> 两个值.</p>
 <p><code>INDEX_DEBUG</code> 的值为 <code>True</code> 或者 <code>on</code> 则 <code>DEBUG</code> 为真，其他任何值都是假。</p>
@@ -506,8 +501,8 @@
 
 <h2 id="_3">什么是配置隔离？</h2>
 <p>同一个项目，不同环境下的部分配置可能不同。Index 内置的配置允许使用 <code>ENV</code> 来指定当前使用的配置环境。</p>
-<p>以上面的配置文件为例，当 <code>ENV</code> 的值为 <code>"dev"</code> 时，<code>Config().DEBUG</code> 会为 <code>True</code>。</p>
-<p>当你指定 <code>ENV</code> 的值为 <code>"pro"</code> 时, 在使用 <code>Config().DEBUG</code> 的时候，它将先从 <code>"pro"</code> 中查找 <code>"debug"</code>（不分大小写）。当没有找到时，继续向上查找。然而这份配置文件并没有在根配置中指定 <code>"debug"</code>，所以 <code>Config().DEBUG</code> 会使用默认值 <code>False</code>。</p>
+<p>以上面的配置文件为例，当 <code>ENV</code> 的值为 <code>"dev"</code> 时，<code>serve_config.DEBUG</code> 会为 <code>True</code>。</p>
+<p>当你指定 <code>ENV</code> 的值为 <code>"pro"</code> 时, 在使用 <code>serve_config.DEBUG</code> 的时候，它将先从 <code>"pro"</code> 中查找 <code>"debug"</code>（不分大小写）。当没有找到时，继续向上查找。然而这份配置文件并没有在根配置中指定 <code>"debug"</code>，所以 <code>serve_config.DEBUG</code> 会使用默认值 <code>False</code>。</p>
 <p>其他的配置同理。</p>
                 
               
