@@ -12,7 +12,7 @@
       
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.7">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.19753c6b.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.3b61ea93.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
         
       
     
@@ -31,7 +31,7 @@
     
       
         
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
       
@@ -53,6 +53,7 @@
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
       
   
+    
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
@@ -82,18 +83,20 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             Index.py
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             
               Application
             
           </span>
         </div>
-      
+      </div>
     </div>
     
       <label class="md-header-nav__button md-icon" for="__search">
@@ -152,10 +155,14 @@
         <div class="md-main__inner md-grid">
           
             
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
+
+
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
@@ -188,6 +195,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       概览
@@ -199,71 +207,6 @@
       
       
 
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Application
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
-      Application
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#index" class="md-nav__link">
-    Index
-  </a>
-  
-    <nav class="md-nav" aria-label="Index">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#router" class="md-nav__link">
-    router
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dispatcher" class="md-nav__link">
-    Dispatcher
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-    
-      
-      
-      
 
 
   <li class="md-nav__item">
@@ -278,6 +221,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../http/" class="md-nav__link">
       HTTP
@@ -288,6 +232,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -302,6 +247,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../event/" class="md-nav__link">
       Lifespan
@@ -312,6 +258,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -326,6 +273,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../openapi/" class="md-nav__link">
       OpenAPI
@@ -336,6 +284,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -350,6 +299,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../command/" class="md-nav__link">
       Command
@@ -362,15 +312,19 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" >
-    <label class="md-nav__link" for="nav-11">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" >
+    
+    <label class="md-nav__link" for="nav-10">
       Configuration
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Configuration" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
+      <label class="md-nav__title" for="nav-10">
         <span class="md-nav__icon md-icon"></span>
         Configuration
       </label>
@@ -380,6 +334,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -392,6 +347,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -413,7 +369,8 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -482,19 +439,22 @@
 <p>它有许多初始化参数，可用于控制一些 Application 内的程序逻辑。</p>
 <ul>
 <li>
-<p><strong><code>templates = Jinja2Template("templates")</code></strong>：此参数用于控制 <code>indexpy.http.responses.TemplateResponse</code> 的具体行为。</p>
+<p><strong><code>debug: bool = False</code></strong>, 用于设置是否使用调试模式下的 <code>Index</code>。</p>
 </li>
 <li>
-<p><strong><code>on_startup: typing.List[typing.Callable] = []</code></strong>：服务启动后自动调用的函数列表。</p>
+<p><strong><code>templates = None</code></strong>：此参数用于控制 <code>indexpy.http.responses.TemplateResponse</code> 的具体行为。</p>
 </li>
 <li>
-<p><strong><code>on_shutdown: typing.List[typing.Callable] = []</code></strong>：服务关闭前自动调用的函数列表。</p>
+<p><strong><code>on_startup: List[Callable] = []</code></strong>：服务启动后自动调用的函数列表。</p>
 </li>
 <li>
-<p><strong><code>routes: typing.List[BaseRoute] = []</code></strong>：路由列表。</p>
+<p><strong><code>on_shutdown: List[Callable] = []</code></strong>：服务关闭前自动调用的函数列表。</p>
 </li>
 <li>
-<p><strong><code>middlewares: typing.List[Middleware] = []</code></strong>：挂载于 Index 对象上 ASGI 中间件列表。</p>
+<p><strong><code>routes: List[BaseRoute] = []</code></strong>：路由列表。</p>
+</li>
+<li>
+<p><strong><code>middlewares: List[Middleware] = []</code></strong>：挂载于 Index 对象上 ASGI 中间件列表。</p>
 </li>
 <li>
 <p><strong><code>exception_handlers = {}</code></strong>：处理异常的函数字典。键为 <code>int</code> 或 <code>Exception</code> 实例，值为对应的函数（定义可参考<a href="../http/#_8">自定义异常处理</a>）。</p>
@@ -508,7 +468,7 @@
 <ul>
 <li><code>append</code>：追加一个新路由到路由树中。</li>
 <li><code>extend</code>：追加一个列表的新路由到路由树中。</li>
-<li><code>search</code>：为请求寻找一个合适的 <code>endpoint</code> 并返回路径参数。</li>
+<li><code>search</code>：为请求寻找一个合适的 <code>endpoint</code> 并同时返回路径参数字典。</li>
 <li><code>url_for</code>：通过路由名称与路径参数反向构建完整的 URL path。</li>
 </ul>
 <h2 id="dispatcher">Dispatcher</h2>
@@ -549,41 +509,6 @@
         
 <footer class="md-footer">
   
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-          <a href=".." class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-            </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  上一页
-                </span>
-                概览
-              </div>
-            </div>
-          </a>
-        
-        
-          <a href="../route/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  下一页
-                </span>
-                Route
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-footer-copyright">
@@ -600,15 +525,15 @@
       
     </div>
     
-      <script src="../assets/javascripts/vendor.0ac82a11.min.js"></script>
-      <script src="../assets/javascripts/bundle.f81dfb4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.08c56446.min.js"></script>
+      <script src="../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+            worker: "../assets/javascripts/worker/search.8c7e0a7e.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
