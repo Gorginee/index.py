@@ -574,7 +574,7 @@
     <span class="o">...</span>
 </code></pre></div>
 
-<p>而你也可以通过使用继承自 <code>pydantic.BaseModel</code> 的类作为类型注解来描述同一类型的全部参数，通过类的继承可以做到复用参数。</p>
+<p>而你也可以通过使用继承自 <code>pydantic.BaseModel</code> 的类作为类型注解来描述同一类型的全部参数，通过类的继承可以做到复用参数。<code>Exclusive</code> 接受五种请求参数的全小写字符串作为参数，分别代表对应五种请求参数的独占模式。下例与上例是等价的。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 <span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">Exclusive</span>
 
