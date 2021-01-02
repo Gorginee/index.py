@@ -365,10 +365,44 @@
     FileRoutes
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="FileRoutes">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_11" class="md-nav__link">
+    中间件定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    处理器定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    路由名称
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    映射规则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
     路由组合
   </a>
   
@@ -380,7 +414,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     路由冲突
   </a>
   
@@ -690,10 +724,44 @@
     FileRoutes
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="FileRoutes">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_11" class="md-nav__link">
+    中间件定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    处理器定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    路由名称
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    映射规则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
     路由组合
   </a>
   
@@ -705,7 +773,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     路由冲突
   </a>
   
@@ -996,10 +1064,26 @@
 </code></pre></div>
 
 <h3 id="fileroutes">FileRoutes</h3>
-<p><code>FileRoutes</code> 是一个特殊的路由列表，它允许你将某一个 <code>module</code> 下所有的 <code>.py</code> 文件一一对应到其相对路径相同的路由。<code>__init__.py</code> 中名为 <code>HTTPMiddleware</code> 的对象将被展开为 HTTP 中间件，<code>SocketMiddleware</code> 将被展开为 WebSocket 中间件。除了 <code>__init__.py</code> 文件以外的 <code>.py</code> 文件中 名为 <code>HTTP</code> 的对象将被视为 HTTP 处理器，<code>Socket</code> 对象将被视为 WebSocket 处理器，名称为 <code>name</code> 的字符串将作为该文件对应的路由名称。</p>
+<div class="admonition notice">
+<p>这也是 Index.py 此项目的命名来源之一。</p>
+</div>
+<p><code>FileRoutes</code> 是一个特殊的路由列表，它允许你将某一个 <code>module</code> 下所有的 <code>.py</code> 文件一一对应到其相对路径相同的路由。</p>
+<h4 id="_11">中间件定义</h4>
+<p><code>__init__.py</code> 中名为 <code>HTTPMiddleware</code> 的对象将被作为 HTTP 中间件、<code>SocketMiddleware</code> 将被作为 WebSocket 中间件，并作用于同目录下所有的路由。</p>
+<h4 id="_12">处理器定义</h4>
+<p>除了 <code>__init__.py</code> 文件以外的 <code>.py</code> 文件中，名为 <code>HTTP</code> 的对象（任何可调用对象均可，函数、类等）将被视为 HTTP 处理器，名为 <code>Socket</code> 的对象（任何可调用对象均可，函数、类等）将被视为 WebSocket 处理器。</p>
+<h4 id="_13">路由名称</h4>
+<p>在文件中定义名称为 <code>name</code> 的字符串将作为该文件对应的路由名称。</p>
+<p><code>FileRoutes</code> 同样拥有 <code>namespace</code> 参数，并且拥有同样的作用。</p>
+<h4 id="_14">映射规则</h4>
+<p><code>module/filename.py</code> 文件将对应路由 <code>/filename</code>，<code>module/dirname/filename.py</code> 将对应 <code>/dirname/filename</code>，以此类推。</p>
 <p>文件映射有一个特殊规则：<code>module/**/index.py</code> 将负责处理 <code>/**/</code> 路径的内容。</p>
-<p>你可以将文件名或文件夹名修改为 <code>module/{name}.py</code> 以此接受路径参数；可以为 <code>FileRoutes</code> 设置 <code>suffix</code> 参数，给每个路由加上后缀，譬如 <code>suffix=".php"</code> 这将使路径看起来很像 PHP；<code>FileRoutes</code> 同样拥有 <code>namespace</code> 参数，并且拥有同样的作用。</p>
-<h3 id="_11">路由组合</h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>你可以将文件名或文件夹名修改为 <code>module/{name}.py</code> 以此接受路径参数。</p>
+</div>
+<p>可以为 <code>FileRoutes</code> 设置 <code>suffix</code> 参数，给每个路由加上后缀，譬如 <code>suffix=".php"</code> 这将使路径看起来很像 PHP 😀。</p>
+<h3 id="_15">路由组合</h3>
 <p>通过使用 <code>Routes</code> 对象与 <code>SubRoutes</code> 对象，你可以任意的构建路由，却不会有任何运行时的损耗——一切嵌套路由都会在代码加载时被展开。</p>
 <div class="codehilite"><pre><span></span><code><span class="n">Routes</span><span class="p">(</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/sayhi/</span><span class="si">{name}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
@@ -1013,7 +1097,7 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<h2 id="_12">路由冲突</h2>
+<h2 id="_16">路由冲突</h2>
 <blockquote>
 <p>当多个路由匹配可以匹配到同一个 url path 时，称为路由冲突。</p>
 </blockquote>
