@@ -474,7 +474,7 @@
                 
                   <h1>Introduction</h1>
                 
-                <p>Index 允许你使用配置文件来配置 <code>index-cli serve</code> / <code>index-cli gunicorn start</code> 等命令。在 Python 代码里，你可以使用 <code>indexpy.conf.serve_config</code> 读取配置，所有配置都是大小写无关的，<code>serve_config.KEY</code> 等价于 <code>serve_config.Key</code> 和 <code>serve_config.key</code>。</p>
+                <p>Index 允许你使用配置文件来配置 <code>index-cli uvicorn</code> / <code>index-cli gunicorn</code> 等命令的行为。在 Python 代码里，你可以使用 <code>indexpy.conf.serve_config</code> 读取配置，所有配置都是大小写无关的，<code>serve_config.KEY</code> 等价于 <code>serve_config.Key</code> 和 <code>serve_config.key</code>。</p>
 <p>在命令启动时，它将自动从环境变量与项目根目录下 <code>indexpy.yaml</code> / <code>indexpy.yml</code> / <code>indexpy.json</code> 里读取配置。</p>
 <h2 id="_1">环境变量</h2>
 <p>Index 在启动时将从环境变量里读取 <code>INDEX_DEBUG</code> 和 <code>INDEX_ENV</code> 两个值.</p>
