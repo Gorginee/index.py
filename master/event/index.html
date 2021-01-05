@@ -468,6 +468,28 @@
 <span class="k">def</span> <span class="nf">logger_on_shutdown</span><span class="p">():</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Called on shutdown&quot;</span><span class="p">)</span>
 </code></pre></div>
+
+<p>也可以在创建 <code>Index</code> 对象时作为参数传递，以下程序与上等价。</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;example&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">logger_on_startup</span><span class="p">():</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Called on startup&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">logger_on_shutdown</span><span class="p">():</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Called on shutdown&quot;</span><span class="p">)</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">(</span>
+    <span class="n">on_startup</span><span class="o">=</span><span class="p">[</span><span class="n">logger_on_startup</span><span class="p">],</span>
+    <span class="n">on_shutdown</span><span class="o">=</span><span class="p">[</span><span class="n">logger_on_shutdown</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
                 
               
               

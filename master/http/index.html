@@ -457,6 +457,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#jinja2" class="md-nav__link">
+    Jinja2 模板引擎
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    其他模板引擎
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#yamlresponse" class="md-nav__link">
     YAMLResponse
   </a>
@@ -471,14 +485,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     响应的简化写法
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     默认响应
   </a>
   
@@ -490,7 +504,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     自定义异常处理
   </a>
   
@@ -866,6 +880,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#jinja2" class="md-nav__link">
+    Jinja2 模板引擎
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    其他模板引擎
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#yamlresponse" class="md-nav__link">
     YAMLResponse
   </a>
@@ -880,14 +908,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     响应的简化写法
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     默认响应
   </a>
   
@@ -899,7 +927,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     自定义异常处理
   </a>
   
@@ -1224,16 +1252,24 @@
 </ul>
 <p><code>FileResponse</code> 将自动设置适当的 <code>Content-Length</code>、<code>Last-Modified</code> 和 <code>ETag</code> 标头。</p>
 <h3 id="templateresponse">TemplateResponse</h3>
-<p>Index 提供了便捷的使用模板的方法。如下代码将会自动在项目下寻找对应的模板进行渲染。（具体行为由 Index 的 <code>templates</code> 参数进行控制）</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
+<p><code>TemplateResponse</code> 是 <code>app.templates.TemplateResponse</code> 的一个快捷方式。</p>
+<h3 id="jinja2">Jinja2 模板引擎</h3>
+<p>Index 内置了对 Jinja2 模板的支持，只要你安装了 <code>jinja2</code> 模块，就能从 <code>indexpy.http.templates</code> 中导出 <code>Jinja2Templates</code>。以下是一个简单的使用样例，访问 "/" 它将从项目根目录下的 templates 目录寻找 homepage.html 文件进行渲染。</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
+<span class="kn">from</span> <span class="nn">indexpy.http.templates</span> <span class="kn">import</span> <span class="n">Jinja2Templates</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">(</span><span class="n">templates</span><span class="o">=</span><span class="n">Jinja2Templates</span><span class="p">(</span><span class="s2">&quot;templates&quot;</span><span class="p">))</span>
 
 
-<span class="k">class</span> <span class="nc">HTTP</span><span class="p">(</span><span class="n">HTTPView</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;chat.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">})</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;get&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">homepage</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;homepage.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">})</span>
 </code></pre></div>
 
+<p>如果你要使用某个模块下的指定文件夹中的模板文件，可以使用 <code>Jinja2Templates("module_name:dirname")</code>。你还可以传递多个目录让 Jinja2 按照顺序依次查找，直到找到第一个可用的模板，例如：<code>Jinja2Templates("templates", "module_name:dirname")</code>。</p>
+<h3 id="_6">其他模板引擎</h3>
+<p>通过继承 <code>indexpy.http.templates.BaseTemplates</code> 并实现 <code>TemplateResponse</code> 方法，你可以实现自己的模板引擎类。</p>
 <h3 id="yamlresponse">YAMLResponse</h3>
 <p>YAMLResponse 与 JSONResponse 的使用方法相同。</p>
 <p>唯一不同的是，一个返回 YAML 格式，一个返回 JSON 格式。</p>
@@ -1260,7 +1296,7 @@
     <span class="k">return</span> <span class="n">EventResponse</span><span class="p">(</span><span class="n">message_gen</span><span class="p">())</span>
 </code></pre></div>
 
-<h3 id="_6">响应的简化写法</h3>
+<h3 id="_7">响应的简化写法</h3>
 <p>为了方便使用，Index 允许自定义一些函数来处理 <code>HTTP</code> 内返回的非 <code>Response</code> 对象。它的原理是拦截响应，通过响应值的类型来自动选择处理函数，把非 <code>Response</code> 对象转换为 <code>Response</code> 对象。</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -1334,14 +1370,14 @@
     <span class="k">return</span> <span class="n">CustomizeJSONResponse</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
 </code></pre></div>
 
-<h3 id="_7">默认响应</h3>
+<h3 id="_8">默认响应</h3>
 <p>当你需要返回一个 HTTP 状态码以及其默认的描述时，可以使用</p>
 <div class="codehilite"><pre><span></span><code><span class="k">raise</span> <span class="n">indexpy</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">HTTPException</span><span class="p">(</span><span class="n">CODE</span><span class="p">)</span>
 </code></pre></div>
 
 <p>其好处在于你可以通过<a href="#_8">自定义异常处理</a>来捕捉并自定义它们。</p>
 <p>例如：网站需要有统一的 404 页面。</p>
-<h2 id="_8">自定义异常处理</h2>
+<h2 id="_9">自定义异常处理</h2>
 <p>对于一些故意抛出的异常，Index 提供了方法进行统一处理。</p>
 <p>以下为样例：</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>

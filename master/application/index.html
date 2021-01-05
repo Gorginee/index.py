@@ -442,7 +442,7 @@
 <p><strong><code>debug: bool = False</code></strong>, 用于设置是否使用调试模式下的 <code>Index</code>。</p>
 </li>
 <li>
-<p><strong><code>templates = None</code></strong>：此参数用于控制 <code>indexpy.http.responses.TemplateResponse</code> 的具体行为。</p>
+<p><strong><code>templates: Optional[BaseTemplates] = None</code></strong>：此参数用于控制 <code>indexpy.http.responses.TemplateResponse</code> 的具体行为。</p>
 </li>
 <li>
 <p><strong><code>on_startup: List[Callable] = []</code></strong>：服务启动后自动调用的函数列表。</p>
