@@ -454,7 +454,8 @@
     TemplateResponse
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="TemplateResponse">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#jinja2" class="md-nav__link">
@@ -467,6 +468,11 @@
   <a href="#_6" class="md-nav__link">
     其他模板引擎
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -877,7 +883,8 @@
     TemplateResponse
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="TemplateResponse">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#jinja2" class="md-nav__link">
@@ -890,6 +897,11 @@
   <a href="#_6" class="md-nav__link">
     其他模板引擎
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1253,7 +1265,7 @@
 <p><code>FileResponse</code> 将自动设置适当的 <code>Content-Length</code>、<code>Last-Modified</code> 和 <code>ETag</code> 标头。</p>
 <h3 id="templateresponse">TemplateResponse</h3>
 <p><code>TemplateResponse</code> 是 <code>app.templates.TemplateResponse</code> 的一个快捷方式。</p>
-<h3 id="jinja2">Jinja2 模板引擎</h3>
+<h4 id="jinja2">Jinja2 模板引擎</h4>
 <p>Index 内置了对 Jinja2 模板的支持，只要你安装了 <code>jinja2</code> 模块，就能从 <code>indexpy.http.templates</code> 中导出 <code>Jinja2Templates</code>。以下是一个简单的使用样例，访问 "/" 它将从项目根目录下的 templates 目录寻找 homepage.html 文件进行渲染。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
@@ -1268,7 +1280,7 @@
 </code></pre></div>
 
 <p>如果你要使用某个模块下的指定文件夹中的模板文件，可以使用 <code>Jinja2Templates("module_name:dirname")</code>。你还可以传递多个目录让 Jinja2 按照顺序依次查找，直到找到第一个可用的模板，例如：<code>Jinja2Templates("templates", "module_name:dirname")</code>。</p>
-<h3 id="_6">其他模板引擎</h3>
+<h4 id="_6">其他模板引擎</h4>
 <p>通过继承 <code>indexpy.http.templates.BaseTemplates</code> 并实现 <code>TemplateResponse</code> 方法，你可以实现自己的模板引擎类。</p>
 <h3 id="yamlresponse">YAMLResponse</h3>
 <p>YAMLResponse 与 JSONResponse 的使用方法相同。</p>
