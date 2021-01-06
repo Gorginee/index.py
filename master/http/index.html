@@ -310,6 +310,19 @@
     Headers
   </a>
   
+    <nav class="md-nav" aria-label="Headers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accept" class="md-nav__link">
+    Accept
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -739,6 +752,19 @@
     Headers
   </a>
   
+    <nav class="md-nav" aria-label="Headers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accept" class="md-nav__link">
+    Accept
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1039,6 +1065,9 @@
 <p><code>request.path_params</code> 是一个字典，包含所有解析出的路径参数。</p>
 <h3 id="headers">Headers</h3>
 <p><code>request.headers</code> 是一个大小写无关的多值字典(multi-dict)。但通过 <code>request.headers.keys()</code>/<code>request.headers.items()</code> 取出来的 <code>key</code> 均为小写。</p>
+<h4 id="accept">Accept</h4>
+<p>通过读取 <code>request.accepted_types</code> 属性你可以获取客户端接收的全部响应类型。</p>
+<p>通过调用 <code>request.accepts</code> 函数你可以判断客户端接受什么样的响应类型。例如：<code>request.accepts("text/html")</code>。</p>
 <h3 id="query-parameters">Query Parameters</h3>
 <p><code>request.query_params</code> 是一个不可变的多值字典(multi-dict)。</p>
 <p>例如：<code>request.query_params['search']</code></p>
@@ -1061,13 +1090,16 @@
 <p>有几种方法可以读到请求体内容：</p>
 <ul>
 <li>
-<p><code>await request.body()</code>：返回一个 <code>bytes</code>。</p>
+<p><code>await request.body</code>：返回一个 <code>bytes</code>。</p>
 </li>
 <li>
-<p><code>await request.form()</code>：将 <code>body</code> 作为表单进行解析并返回结果（多值字典）。</p>
+<p><code>await request.form</code>：将 <code>body</code> 作为表单进行解析并返回结果（多值字典）。</p>
 </li>
 <li>
-<p><code>await request.json()</code>：将 <code>body</code> 作为 JSON 字符串解析并返回结果。</p>
+<p><code>await request.json</code>：将 <code>body</code> 作为 JSON 字符串解析并返回结果。</p>
+</li>
+<li>
+<p><code>await request.data</code>: 将 <code>body</code> 根据 <code>content_type</code> 提供的信息进行解析。</p>
 </li>
 </ul>
 <p>你也可以使用 <code>async for</code> 语法将 <code>body</code> 作为一个 <code>bytes</code> 流进行读取：</p>
@@ -1079,10 +1111,10 @@
     <span class="o">...</span>
 </code></pre></div>
 
-<p>如果你直接使用了 <code>request.stream()</code> 去读取数据，那么请求体将不会缓存在内存中。其后任何对 <code>.body()</code>/<code>.form()</code>/<code>.json()</code> 的调用都将抛出错误。</p>
+<p>如果你直接使用了 <code>request.stream()</code> 去读取数据，那么请求体将不会缓存在内存中。其后任何对 <code>.body</code>/<code>.form</code>/<code>.json</code> 的调用都将抛出错误。</p>
 <p>在某些情况下，例如长轮询或流式响应，你可能需要确定客户端是否已断开连接。可以使用 <code>disconnected = await request.is_disconnected()</code> 确定此状态。</p>
 <h3 id="request-files">Request Files</h3>
-<p>通过 <code>await request.form()</code> 可以解析通过 <code>multipart/form-data</code> 格式接收到的表单，包括文件。</p>
+<p>通过 <code>await request.form</code> 可以解析通过 <code>multipart/form-data</code> 格式接收到的表单，包括文件。</p>
 <p>文件将被包装为 <code>starlette.datastructures.UploadFile</code> 对象，它有如下属性：</p>
 <ul>
 <li><code>filename: str</code>: 被提交的原始文件名称 (例如 <code>myimage.jpg</code>).</li>
@@ -1097,7 +1129,7 @@
 <li><code>async close()</code>: 关闭文件。</li>
 </ul>
 <p>下面是一个读取原始文件名称和内容的例子：</p>
-<div class="codehilite"><pre><span></span><code><span class="n">form</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><code><span class="n">form</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span>
 <span class="n">filename</span> <span class="o">=</span> <span class="n">form</span><span class="p">[</span><span class="s2">&quot;upload_file&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span>
 <span class="n">contents</span> <span class="o">=</span> <span class="k">await</span> <span class="n">form</span><span class="p">[</span><span class="s2">&quot;upload_file&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </code></pre></div>
