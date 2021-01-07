@@ -1437,6 +1437,11 @@
 <span class="k">def</span> <span class="nf">value_error</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="s2">&quot;Something went wrong with the server.&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 </code></pre></div>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>你不能在这里使用 <code>request.body</code>/<code>.form</code>/<code>.json</code>/<code>.data</code> 等方法读取请求的内容。</p>
+</div>
                 
               
               
