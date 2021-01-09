@@ -12,7 +12,7 @@
       
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.4">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.3b61ea93.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.15aa0b43.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.75751829.min.css">
         
       
     
@@ -404,13 +404,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#dispatcher" class="md-nav__link">
-    Dispatcher
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -471,29 +464,6 @@
 <li><code>search</code>：为请求寻找一个合适的 <code>endpoint</code> 并同时返回路径参数字典。</li>
 <li><code>url_for</code>：通过路由名称与路径参数反向构建完整的 URL path。</li>
 </ul>
-<h2 id="dispatcher">Dispatcher</h2>
-<p><code>Dispatcher</code> 可以用于组合多个 ASGI 应用。以下为一个简单的用例，当一个新的请求 <code>/django/admin/</code> 到达 <code>app</code> 时，按照顺序依次调用 <code>django_app</code>、<code>other_django_app</code>，第一个非 404 的响应将会作为最后的结果返回给客户端。如果所有的 Application 都返回 404 响应且未读取请求体，则最终由 <code>application</code> 来处理此次请求；如果有任意一个 Application 读取了请求体且返回 404 响应，则会调用 <code>handle404</code> 返回响应（默认是一个空内容的 404 响应，你可以在参数里覆盖它）。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">a2wsgi</span> <span class="kn">import</span> <span class="n">WSGIMiddleware</span>
-<span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span><span class="p">,</span> <span class="n">Dispatcher</span>
-
-<span class="kn">from</span> <span class="nn">django_app_name.wsgi</span> <span class="kn">import</span> <span class="n">application</span> <span class="k">as</span> <span class="n">django_app</span>
-<span class="kn">from</span> <span class="nn">other_django_app_name.wsgi</span> <span class="kn">import</span> <span class="n">application</span> <span class="k">as</span> <span class="n">other_django_app</span>
-<span class="kn">from</span> <span class="nn">fastapi_app</span> <span class="kn">import</span> <span class="n">app</span> <span class="k">as</span> <span class="n">fastapi_app</span>
-
-<span class="n">application</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">Dispatcher</span><span class="p">(</span>
-    <span class="n">application</span><span class="p">,</span>
-    <span class="p">(</span><span class="s2">&quot;/django&quot;</span><span class="p">,</span> <span class="n">WSGIMiddleware</span><span class="p">(</span><span class="n">django_app</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;/django&quot;</span><span class="p">,</span> <span class="n">WSGIMiddleware</span><span class="p">(</span><span class="n">other_django_app</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;/some&quot;</span><span class="p">,</span> <span class="n">fastapi_app</span><span class="p">),</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<div class="admonition notice">
-<p class="admonition-title">Notice</p>
-<p>使用 <code>pip install a2wsgi</code> 安装 <code>a2wsgi</code>，可以使用 <code>a2wsgi.WSGIMiddleware</code> 将一个 <code>WSGI</code> 应用转换为 <code>ASGI</code> 应用。</p>
-</div>
                 
               
               
@@ -525,8 +495,8 @@
       
     </div>
     
-      <script src="../assets/javascripts/vendor.08c56446.min.js"></script>
-      <script src="../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.93c04032.min.js"></script>
+      <script src="../assets/javascripts/bundle.83e5331e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
