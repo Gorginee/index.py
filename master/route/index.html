@@ -902,8 +902,6 @@
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.routing</span> <span class="kn">import</span> <span class="n">HttpRoute</span><span class="p">,</span> <span class="n">SocketRoute</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
-
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">return</span> <span class="s2">&quot;hello world&quot;</span>
@@ -913,7 +911,7 @@
     <span class="o">...</span>
 
 
-<span class="n">app</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">(</span><span class="n">routes</span><span class="o">=</span><span class="p">[</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/hello&quot;</span><span class="p">,</span> <span class="n">hello</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;get&quot;</span><span class="p">),</span>
     <span class="n">SocketRoute</span><span class="p">(</span><span class="s2">&quot;/hello&quot;</span><span class="p">,</span> <span class="n">hello_ws</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello_ws&quot;</span><span class="p">),</span>
 <span class="p">])</span>
@@ -995,8 +993,6 @@
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.routing</span> <span class="kn">import</span> <span class="n">Routes</span><span class="p">,</span> <span class="n">HttpRoute</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
-
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">return</span> <span class="s2">&quot;hello world&quot;</span>
@@ -1006,7 +1002,7 @@
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/hello&quot;</span><span class="p">,</span> <span class="n">hello</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;get&quot;</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="n">app</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">routes</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">(</span><span class="n">routes</span><span class="o">=</span><span class="n">routes</span><span class="p">)</span>
 </code></pre></div>
 
 <h4 id="_9">名称空间</h4>
@@ -1087,13 +1083,10 @@
 <p>通过使用 <code>Routes</code> 对象与 <code>SubRoutes</code> 对象，你可以任意的构建路由，却不会有任何运行时的损耗——一切嵌套路由都会在代码加载时被展开。</p>
 <div class="codehilite"><pre><span></span><code><span class="n">Routes</span><span class="p">(</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/sayhi/</span><span class="si">{name}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
-    <span class="n">SubRoutes</span><span class="p">(</span>
-        <span class="s2">&quot;/hello&quot;</span><span class="p">,</span>
-        <span class="n">Routes</span><span class="p">(</span>
-            <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/world&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
-            <span class="n">SocketRoute</span><span class="p">(</span><span class="s2">&quot;/socket_world&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
-        <span class="p">),</span>
-    <span class="p">),</span>
+    <span class="n">SubRoutes</span><span class="p">(</span><span class="s2">&quot;/hello&quot;</span><span class="p">,</span> <span class="n">Routes</span><span class="p">(</span>
+        <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/world&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
+        <span class="n">SocketRoute</span><span class="p">(</span><span class="s2">&quot;/socket_world&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
+    <span class="p">)),</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -1102,29 +1095,29 @@
 <p>当多个路由匹配可以匹配到同一个 url path 时，称为路由冲突。</p>
 </blockquote>
 <p>Index 做了大量的路由构造时检查，避免了很多没必要的路由错误与冲突，但仍然有一些路由冲突是一定会存在的。Index 的路由构造使用 Radix Tree，而遍历 Radix Tree 方式为深度优先遍历。但对于同一层级的节点来说，匹配顺序由插入顺序决定。</p>
-<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+<div class="codehilite"><pre><span></span><code><span class="n">Routes</span><span class="p">(</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/static/verify.txt&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/static/{filepath:path}&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
-<span class="p">])</span>
+<span class="p">)</span>
 </code></pre></div>
 
 <ul>
 <li>在上例中，两个路由同为 <code>/static/</code> 节点下的子节点，故而在匹配 url 为 <code>/static/verify.txt</code> 的请求时，按照注册顺序，会匹配到第一条。</li>
 <li>在下例中，<code>/static/verify/google.txt</code> 能匹配到的是第三条路由而不是第二条——因为第三条路由与第一条路由同为 <code>/static/verify/</code> 节点下的子节点，第二条路由属于 <code>/static/</code> 节点下，<code>/static/</code> 的子节点里优先匹配到 <code>verify</code> 节点与其子节点，后匹配 <code>{filepath:path}</code> 节点。故而匹配到第三条路由，而不是第二条。</li>
 </ul>
-<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+<div class="codehilite"><pre><span></span><code><span class="n">Routes</span><span class="p">(</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/static/verify/bing.txt&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/static/{filepath:path}&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/static/verify/google.txt&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
-<span class="p">])</span>
+<span class="p">)</span>
 </code></pre></div>
 
 <p>但如果注册顺序如下例，则 <code>/static/verify/google.txt</code> 匹配到的路由为第一条，</p>
-<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+<div class="codehilite"><pre><span></span><code><span class="n">Routes</span><span class="p">(</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/static/{filepath:path}&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/static/verify/bing.txt&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/static/verify/google.txt&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
-<span class="p">])</span>
+<span class="p">)</span>
 </code></pre></div>
                 
               
