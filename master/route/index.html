@@ -549,7 +549,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../config/" class="md-nav__link">
+    <a href="../config/index.md" class="md-nav__link">
       Introduction
     </a>
   </li>
@@ -562,7 +562,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../config/list/" class="md-nav__link">
+    <a href="../config/list.md" class="md-nav__link">
       Built-in List
     </a>
   </li>
@@ -798,10 +798,10 @@
                 
                   <h1>Route</h1>
                 
-                <p>Index 的路由基于 <a href="https://en.wikipedia.org/wiki/Radix_tree">Radix Tree</a>。</p>
+                <p>Index-py 的路由基于 <a href="https://en.wikipedia.org/wiki/Radix_tree">Radix Tree</a>。</p>
 <h2 id="_1">基本用法</h2>
 <h3 id="_2">装饰器注册</h3>
-<p>与 bottle/flask 之类的框架一样，Index 支持使用装饰器注册路由。下面的例子里，<code>name</code> 是路由名称，这在反向查找路由时会起到作用。</p>
+<p>与 bottle/flask 之类的框架一样，Index-py 支持使用装饰器注册路由。下面的例子里，<code>name</code> 是路由名称，这在反向查找路由时会起到作用。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
@@ -898,7 +898,7 @@
 </li>
 </ul>
 <h3 id="_4">列表式注册</h3>
-<p>Index 同样支持类似于 Django 的列表式写法：</p>
+<p>Index-py 同样支持类似于 Django 的列表式写法：</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.routing</span> <span class="kn">import</span> <span class="n">HttpRoute</span><span class="p">,</span> <span class="n">SocketRoute</span>
 
@@ -1094,7 +1094,7 @@
 <blockquote>
 <p>当多个路由匹配可以匹配到同一个 url path 时，称为路由冲突。</p>
 </blockquote>
-<p>Index 做了大量的路由构造时检查，避免了很多没必要的路由错误与冲突，但仍然有一些路由冲突是一定会存在的。Index 的路由构造使用 Radix Tree，而遍历 Radix Tree 方式为深度优先遍历。但对于同一层级的节点来说，匹配顺序由插入顺序决定。</p>
+<p>Index-py 做了大量的路由构造时检查，避免了很多没必要的路由错误与冲突，但仍然有一些路由冲突是一定会存在的。Index-py 的路由构造使用 Radix Tree，而遍历 Radix Tree 方式为深度优先遍历。但对于同一层级的节点来说，匹配顺序由插入顺序决定。</p>
 <div class="codehilite"><pre><span></span><code><span class="n">Routes</span><span class="p">(</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/static/verify.txt&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
     <span class="n">HttpRoute</span><span class="p">(</span><span class="s2">&quot;/static/{filepath:path}&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>

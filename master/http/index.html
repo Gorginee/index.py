@@ -490,13 +490,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#yamlresponse" class="md-nav__link">
-    YAMLResponse
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#serversendeventresponse" class="md-nav__link">
     ServerSendEventResponse
   </a>
@@ -645,7 +638,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../config/" class="md-nav__link">
+    <a href="../config/index.md" class="md-nav__link">
       Introduction
     </a>
   </li>
@@ -658,7 +651,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../config/list/" class="md-nav__link">
+    <a href="../config/list.md" class="md-nav__link">
       Built-in List
     </a>
   </li>
@@ -932,13 +925,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#yamlresponse" class="md-nav__link">
-    YAMLResponse
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#serversendeventresponse" class="md-nav__link">
     ServerSendEventResponse
   </a>
@@ -1026,7 +1012,7 @@
 <p>使用类处理多种请求十分简单。只需要继承 <code>indexpy.http.HTTPView</code> 并编写对应的方法，支持的方法有 <code>"get"</code>，<code>"post"</code>，<code>"put"</code>，<code>"patch"</code>，<code>"delete"</code>，<code>"head"</code>，<code>"options"</code>，<code>"trace"</code>。</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>对于一般的跨域需求，<code>options</code> 方法不需要自行编写，做好<a href="../config/list/#cors_allow_origins">跨域配置</a>即可。</p>
+<p>对于一般的跨域需求，<code>options</code> 方法不需要自行编写，做好<a href="./config/list.md#cors_allow_origins">跨域配置</a>即可。</p>
 </div>
 <p>通过 <code>self.request</code> 可以读取此次请求的信息。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
@@ -1099,7 +1085,7 @@
 <p><code>await request.json</code>：将 <code>body</code> 作为 JSON 字符串解析并返回结果。</p>
 </li>
 <li>
-<p><code>await request.data</code>：将 <code>body</code> 根据 <code>content_type</code> 提供的信息进行解析。</p>
+<p><code>await request.data</code>：将 <code>body</code> 根据 <code>content_type</code> 提供的信息进行解析并返回。</p>
 </li>
 </ul>
 <p>你也可以使用 <code>async for</code> 语法将 <code>body</code> 作为一个 <code>bytes</code> 流进行读取：</p>
@@ -1289,7 +1275,7 @@
 <h3 id="templateresponse">TemplateResponse</h3>
 <p><code>TemplateResponse</code> 是 <code>app.templates.TemplateResponse</code> 的一个快捷方式。</p>
 <h4 id="jinja2">Jinja2 模板引擎</h4>
-<p>Index 内置了对 Jinja2 模板的支持，只要你安装了 <code>jinja2</code> 模块，就能从 <code>indexpy.http.templates</code> 中导出 <code>Jinja2Templates</code>。以下是一个简单的使用样例，访问 "/" 它将从项目根目录下的 templates 目录寻找 homepage.html 文件进行渲染。</p>
+<p>Index-py 内置了对 Jinja2 模板的支持，只要你安装了 <code>jinja2</code> 模块，就能从 <code>indexpy.http.templates</code> 中导出 <code>Jinja2Templates</code>。以下是一个简单的使用样例，访问 "/" 它将从项目根目录下的 templates 目录寻找 homepage.html 文件进行渲染。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.templates</span> <span class="kn">import</span> <span class="n">Jinja2Templates</span>
@@ -1305,9 +1291,6 @@
 <p>如果你要使用某个模块下的指定文件夹中的模板文件，可以使用 <code>Jinja2Templates("module_name:dirname")</code>。你还可以传递多个目录让 Jinja2 按照顺序依次查找，直到找到第一个可用的模板，例如：<code>Jinja2Templates("templates", "module_name:dirname")</code>。</p>
 <h4 id="_6">其他模板引擎</h4>
 <p>通过继承 <code>indexpy.http.templates.BaseTemplates</code> 并实现 <code>TemplateResponse</code> 方法，你可以实现自己的模板引擎类。</p>
-<h3 id="yamlresponse">YAMLResponse</h3>
-<p>YAMLResponse 与 JSONResponse 的使用方法相同。</p>
-<p>唯一不同的是，一个返回 YAML 格式，一个返回 JSON 格式。</p>
 <h3 id="serversendeventresponse">ServerSendEventResponse</h3>
 <p>通过 <code>ServerSendEventResponse</code> 可以返回一个 <a href="https://developer.mozilla.org/zh-CN/docs/Server-sent_events/Using_server-sent_events">Server Sent Events</a> 响应，这是一种 HTTP 长连接响应，可应用于服务器实时推送数据到客户端等场景。</p>
 <p><code>ServerSendEventResponse</code> 除了可以接受诸如 <code>status_code</code>、<code>headers</code> 等常规参数外，还需要自行传入一个用于生成消息的异步生成器。传入的异步生成器 <code>yield</code> 的每一条消息都需要为合规的 Server-Sent Event 消息（<code>str</code> 类型），否则会出现不可预料的错误。</p>
@@ -1332,12 +1315,12 @@
 </code></pre></div>
 
 <h3 id="_7">响应的简化写法</h3>
-<p>为了方便使用，Index 允许自定义一些函数来处理 <code>HTTP</code> 内返回的非 <code>Response</code> 对象。它的原理是拦截响应，通过响应值的类型来自动选择处理函数，把非 <code>Response</code> 对象转换为 <code>Response</code> 对象。</p>
+<p>为了方便使用，Index-py 允许自定义一些函数来处理 <code>HTTP</code> 内返回的非 <code>Response</code> 对象。它的原理是拦截响应，通过响应值的类型来自动选择处理函数，把非 <code>Response</code> 对象转换为 <code>Response</code> 对象。</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>如果需要手动把函数的返回值转换为 <code>Response</code> 对象，则可以使用 <code>indexpy.http.responses.convert</code>。</p>
 </div>
-<p>Index 内置了三个处理函数用于处理六种类型：</p>
+<p>Index-py 内置了三个处理函数用于处理六种类型：</p>
 <div class="codehilite"><pre><span></span><code><span class="nd">@automatic</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
 <span class="k">def</span> <span class="nf">_none</span><span class="p">(</span><span class="n">ret</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">NoReturn</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
@@ -1407,7 +1390,7 @@
 
 <h3 id="http_1">HTTP 异常</h3>
 <p>其参数签名是：<code>HTTPException(status_code: int, content: typing.Any = None, headers: dict = None, media_type: str = None)</code></p>
-<p>你可以通过抛出 <code>HTTPException</code> 来返回一个 HTTP 响应（不必担心它变成一个真正的异常抛出，Index 知道该如何将它变成一个普通的响应对象）。如果你没有给出 <code>content</code>，那么它将使用 Python 标准库中的 <code>http.HTTPStatus(status_code).description</code> 作为值。</p>
+<p>你可以通过抛出 <code>HTTPException</code> 来返回一个 HTTP 响应（不必担心它变成一个真正的异常抛出，Index-py 知道该如何将它变成一个普通的响应对象）。如果你没有给出 <code>content</code>，那么它将使用 Python 标准库中的 <code>http.HTTPStatus(status_code).description</code> 作为值。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPException</span>
 
 
@@ -1418,8 +1401,8 @@
 </code></pre></div>
 
 <h2 id="_8">自定义异常处理</h2>
-<p>对于一些故意抛出的异常，Index 提供了方法进行统一处理。</p>
-<p>你可以捕捉指定的 HTTP 状态码，那么在应对包含对应 HTTP 状态码的 <code>HTTPException</code> 异常时，Index 会使用你定义的函数而不是默认行为。</p>
+<p>对于一些故意抛出的异常，Index-py 提供了方法进行统一处理。</p>
+<p>你可以捕捉指定的 HTTP 状态码，那么在应对包含对应 HTTP 状态码的 <code>HTTPException</code> 异常时，Index-py 会使用你定义的函数而不是默认行为。</p>
 <p>你也可以捕捉其他继承自 <code>Exception</code> 的异常，通过自定义函数，返回指定的内容给客户端。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">Request</span>

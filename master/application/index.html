@@ -338,7 +338,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../config/" class="md-nav__link">
+    <a href="../config/index.md" class="md-nav__link">
       Introduction
     </a>
   </li>
@@ -351,7 +351,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../config/list/" class="md-nav__link">
+    <a href="../config/list.md" class="md-nav__link">
       Built-in List
     </a>
   </li>
@@ -447,13 +447,13 @@
 <p><strong><code>routes: List[BaseRoute] = []</code></strong>：路由列表。</p>
 </li>
 <li>
-<p><strong><code>middlewares: List[Middleware] = []</code></strong>：挂载于 Index 对象上 ASGI 中间件列表。</p>
+<p><strong><code>middlewares: List[Middleware] = []</code></strong>：挂载于 Index-py 对象上 ASGI 中间件列表。</p>
 </li>
 <li>
 <p><strong><code>exception_handlers = {}</code></strong>：处理异常的函数字典。键为 <code>int</code> 或 <code>Exception</code> 实例，值为对应的函数（定义可参考<a href="../http/#_8">自定义异常处理</a>）。</p>
 </li>
 <li>
-<p><strong><code>factory_class: FactoryClass</code></strong>：通过覆盖此参数，可以自定义整个 Index 作用域中使用的 <code>Request</code> 类与 <code>WebSocket</code> 类。</p>
+<p><strong><code>factory_class: FactoryClass</code></strong>：通过覆盖此参数，可以自定义整个 Index-py 作用域中使用的 <code>Request</code> 类与 <code>WebSocket</code> 类。</p>
 </li>
 </ul>
 <h3 id="router"><code>router</code></h3>

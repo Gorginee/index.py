@@ -386,7 +386,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../config/" class="md-nav__link">
+    <a href="../config/index.md" class="md-nav__link">
       Introduction
     </a>
   </li>
@@ -399,7 +399,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../config/list/" class="md-nav__link">
+    <a href="../config/list.md" class="md-nav__link">
       Built-in List
     </a>
   </li>
@@ -473,7 +473,7 @@
                   <h1>Background Task</h1>
                 
                 <p>在传统的多线程 web 开发里，要正常的启动一个后台任务是十分困难的，想想线程安全和变量作用域之类的事情。饶是你经验丰富，解决这些问题依旧是痛苦的。</p>
-<p>在 Index 中你只需要一些 <a href="https://docs.python.org/3/library/asyncio.html"><code>asyncio</code></a> 的知识就可以做到轻松的启动后台任务。</p>
+<p>在 Index-py 中你只需要一些 <a href="https://docs.python.org/3/library/asyncio.html"><code>asyncio</code></a> 的知识就可以做到轻松的启动后台任务。</p>
 <h2 id="_1">单一后台任务</h2>
 <p>很多情况下我们需要这样一种后台任务——在响应结束后，执行某种耗时的 IO 操作。</p>
 <p><code>indexpy.http.BackgroundTask</code> 是一个神奇的包装类，它可以帮助你把函数提交到此次 http 响应结束后执行——如果响应未完成就失败了，后台任务将不会执行。</p>

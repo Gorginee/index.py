@@ -413,7 +413,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../config/" class="md-nav__link">
+    <a href="../config/index.md" class="md-nav__link">
       Introduction
     </a>
   </li>
@@ -426,7 +426,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../config/list/" class="md-nav__link">
+    <a href="../config/list.md" class="md-nav__link">
       Built-in List
     </a>
   </li>
@@ -526,9 +526,9 @@
                 
                   <h1>OpenAPI</h1>
                 
-                <p>Index 使用 <a href="https://pydantic-docs.helpmanual.io/">pydantic</a> 用于更轻松的解析 HTTP 请求信息，并为之绑定了一套生成 OpenAPI 文档的程序。</p>
+                <p>Index-py 使用 <a href="https://pydantic-docs.helpmanual.io/">pydantic</a> 用于更轻松的解析 HTTP 请求信息，并为之绑定了一套生成 OpenAPI 文档的程序。</p>
 <h2 id="openapi">显示 OpenAPI 文档</h2>
-<p>将 <code>indexpy.openapi.application.OpenAPI</code> 挂载进 index 中。启动 index，访问你服务上 <code>/openapi/</code> 即可看到生成的文档。</p>
+<p>将 <code>indexpy.openapi.application.OpenAPI</code> 挂载进 Index-py 中。启动 index，访问你服务上 <code>/openapi/</code> 即可看到生成的文档。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.routing</span> <span class="kn">import</span> <span class="n">SubRoutes</span>
 <span class="kn">from</span> <span class="nn">indexpy.openapi</span> <span class="kn">import</span> <span class="n">OpenAPI</span>
@@ -589,7 +589,7 @@
 </code></pre></div>
 
 <h3 id="_3">描述响应结果</h3>
-<p>为了描述不同状态码的响应结果，Index 使用装饰器描述，而不是类型注解。<code>describe_response</code> 接受五个参数，其中 <code>status</code> 为必需项，<code>description</code>、<code>content</code>、<code>headers</code> 和 <code>links</code> 为可选项，对应<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"> OpenAPI Specification </a>里的同名字段。</p>
+<p>为了描述不同状态码的响应结果，Index-py 使用装饰器描述，而不是类型注解。<code>describe_response</code> 接受五个参数，其中 <code>status</code> 为必需项，<code>description</code>、<code>content</code>、<code>headers</code> 和 <code>links</code> 为可选项，对应<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"> OpenAPI Specification </a>里的同名字段。</p>
 <p>其中，<code>content</code> 既可以使用类型对象或 <code>pydantic.BaseModel</code> 的派生子类描述响应，亦可以直接传递符合 OpenAPI 文档的 Dict（当你描述返回一个非 application/json 类型的响应时这很有用）。</p>
 <div class="admonition notice">
 <p class="admonition-title">Notice</p>
@@ -658,7 +658,7 @@
 </code></pre></div>
 
 <h2 id="tags">Tags</h2>
-<p>OpenAPI 的 Tags 是一个有用的功能，在 Index 里，你可以通过如下方式来指定 URL 的分类标签。</p>
+<p>OpenAPI 的 Tags 是一个有用的功能，在 Index-py 里，你可以通过如下方式来指定 URL 的分类标签。</p>
 <p><code>tags</code> 参数必须是一个 <code>dict</code> 类型，键为标签名。值需要包含 <code>description</code>，用于描述此标签；<code>paths</code> 是 URL 列表，如果 URL 包含路径参数，直接使用不带 <code>:type</code> 的字符串即可。</p>
 <div class="codehilite"><pre><span></span><code><span class="n">OpenAPI</span><span class="p">(</span>
     <span class="s2">&quot;index.py example&quot;</span><span class="p">,</span>
