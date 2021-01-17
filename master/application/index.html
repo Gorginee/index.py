@@ -12,7 +12,7 @@
       
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.4">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.5">
     
     
       
@@ -195,25 +195,15 @@
       
 
 
-
-  <li class="md-nav__item">
-    <a href=".." class="md-nav__link">
-      概览
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../route/" class="md-nav__link">
-      Route
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        概览
+      </a>
+    </li>
+  
 
     
       
@@ -221,12 +211,49 @@
       
 
 
-
-  <li class="md-nav__item">
-    <a href="../http/" class="md-nav__link">
-      HTTP
-    </a>
-  </li>
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Application
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Application
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    Index
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
 
     
       
@@ -234,25 +261,15 @@
       
 
 
-
-  <li class="md-nav__item">
-    <a href="../websocket/" class="md-nav__link">
-      WebSocket
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../event/" class="md-nav__link">
-      Lifespan
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../route/" class="md-nav__link">
+        Route
+      </a>
+    </li>
+  
 
     
       
@@ -260,25 +277,15 @@
       
 
 
-
-  <li class="md-nav__item">
-    <a href="../middleware/" class="md-nav__link">
-      Middleware
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../openapi/" class="md-nav__link">
-      OpenAPI
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http/" class="md-nav__link">
+        HTTP
+      </a>
+    </li>
+  
 
     
       
@@ -286,12 +293,15 @@
       
 
 
-
-  <li class="md-nav__item">
-    <a href="../background/" class="md-nav__link">
-      Background Task
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../websocket/" class="md-nav__link">
+        WebSocket
+      </a>
+    </li>
+  
 
     
       
@@ -299,12 +309,79 @@
       
 
 
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../event/" class="md-nav__link">
+        Lifespan
+      </a>
+    </li>
+  
 
-  <li class="md-nav__item">
-    <a href="../command/" class="md-nav__link">
-      Command
-    </a>
-  </li>
+    
+      
+      
+      
+
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../middleware/" class="md-nav__link">
+        Middleware
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../openapi/" class="md-nav__link">
+        OpenAPI
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../background/" class="md-nav__link">
+        Background Task
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../command/" class="md-nav__link">
+        Command
+      </a>
+    </li>
+  
 
     
   </ul>
@@ -334,19 +411,6 @@
     Index
   </a>
   
-    <nav class="md-nav" aria-label="Index">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#router" class="md-nav__link">
-    router
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -372,7 +436,7 @@
 <p><code>Index</code> 对象作为 Index.py 程序的入口，推荐每个项目里始终只使用一个 <code>Index</code> 对象。</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>通过 <code>scope["app"]</code>、<code>request["app"]</code> 或 <code>websocket["app"]</code> 可以获取到正在使用的 <code>Index</code> 对象。</p>
+<p>通过 <code>scope["app"]</code>、<code>request.app</code> 或 <code>websocket.app</code> 可以获取到正在使用的 <code>Index</code> 对象。</p>
 </div>
 <p>它有许多初始化参数，可用于控制一些 Application 内的程序逻辑。</p>
 <ul>
@@ -401,14 +465,6 @@
 <p><strong><code>factory_class: FactoryClass</code></strong>：通过覆盖此参数，可以自定义整个 Index-py 作用域中使用的 <code>Request</code> 类与 <code>WebSocket</code> 类。</p>
 </li>
 </ul>
-<h3 id="router"><code>router</code></h3>
-<p>所有的路由最终都将归入此路由对象中，此对象有四个方法：</p>
-<ul>
-<li><code>append</code>：追加一个新路由到路由树中。</li>
-<li><code>extend</code>：追加一个列表的新路由到路由树中。</li>
-<li><code>search</code>：为请求寻找一个合适的 <code>endpoint</code> 并同时返回路径参数字典。</li>
-<li><code>url_for</code>：通过路由名称与路径参数反向构建完整的 URL path。</li>
-</ul>
                 
               
               
@@ -423,6 +479,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href=".." class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                概览
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../route/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                Route
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
