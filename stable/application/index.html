@@ -246,26 +246,6 @@
     Index
   </a>
   
-    <nav class="md-nav" aria-label="Index">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#router" class="md-nav__link">
-    router
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dispatcher" class="md-nav__link">
-    Dispatcher
-  </a>
-  
 </li>
       
     </ul>
@@ -404,62 +384,6 @@
   
 
     
-      
-      
-      
-
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" >
-      
-      <label class="md-nav__link" for="nav-11">
-        Configuration
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Configuration" data-md-level="1">
-        <label class="md-nav__title" for="nav-11">
-          <span class="md-nav__icon md-icon"></span>
-          Configuration
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../config/" class="md-nav__link">
-        Introduction
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../config/list/" class="md-nav__link">
-        Built-in List
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
   </ul>
 </nav>
                   </div>
@@ -487,26 +411,6 @@
     Index
   </a>
   
-    <nav class="md-nav" aria-label="Index">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#router" class="md-nav__link">
-    router
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dispatcher" class="md-nav__link">
-    Dispatcher
-  </a>
-  
 </li>
       
     </ul>
@@ -532,63 +436,35 @@
 <p><code>Index</code> 对象作为 Index.py 程序的入口，推荐每个项目里始终只使用一个 <code>Index</code> 对象。</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>通过 <code>scope["app"]</code>、<code>request["app"]</code> 或 <code>websocket["app"]</code> 可以获取到正在使用的 <code>Index</code> 对象。</p>
+<p>通过 <code>scope["app"]</code>、<code>request.app</code> 或 <code>websocket.app</code> 可以获取到正在使用的 <code>Index</code> 对象。</p>
 </div>
 <p>它有许多初始化参数，可用于控制一些 Application 内的程序逻辑。</p>
 <ul>
 <li>
-<p><strong><code>templates = Jinja2Template("templates")</code></strong>：此参数用于控制 <code>indexpy.http.responses.TemplateResponse</code> 的具体行为。</p>
+<p><strong><code>debug: bool = False</code></strong>, 用于设置是否使用调试模式下的 <code>Index</code>。</p>
 </li>
 <li>
-<p><strong><code>on_startup: typing.List[typing.Callable] = []</code></strong>：服务启动后自动调用的函数列表。</p>
+<p><strong><code>templates: Optional[BaseTemplates] = None</code></strong>：此参数用于控制 <code>indexpy.http.responses.TemplateResponse</code> 的具体行为。</p>
 </li>
 <li>
-<p><strong><code>on_shutdown: typing.List[typing.Callable] = []</code></strong>：服务关闭前自动调用的函数列表。</p>
+<p><strong><code>on_startup: List[Callable] = []</code></strong>：服务启动后自动调用的函数列表。</p>
 </li>
 <li>
-<p><strong><code>routes: typing.List[BaseRoute] = []</code></strong>：路由列表。</p>
+<p><strong><code>on_shutdown: List[Callable] = []</code></strong>：服务关闭前自动调用的函数列表。</p>
 </li>
 <li>
-<p><strong><code>middlewares: typing.List[Middleware] = []</code></strong>：挂载于 Index 对象上 ASGI 中间件列表。</p>
+<p><strong><code>routes: List[BaseRoute] = []</code></strong>：路由列表。</p>
+</li>
+<li>
+<p><strong><code>middlewares: List[Middleware] = []</code></strong>：挂载于 Index-py 对象上 ASGI 中间件列表。</p>
 </li>
 <li>
 <p><strong><code>exception_handlers = {}</code></strong>：处理异常的函数字典。键为 <code>int</code> 或 <code>Exception</code> 实例，值为对应的函数（定义可参考<a href="../http/#_8">自定义异常处理</a>）。</p>
 </li>
 <li>
-<p><strong><code>factory_class: FactoryClass</code></strong>：通过覆盖此参数，可以自定义整个 Index 作用域中使用的 <code>Request</code> 类与 <code>WebSocket</code> 类。</p>
+<p><strong><code>factory_class: FactoryClass</code></strong>：通过覆盖此参数，可以自定义整个 Index-py 作用域中使用的 <code>Request</code> 类与 <code>WebSocket</code> 类。</p>
 </li>
 </ul>
-<h3 id="router"><code>router</code></h3>
-<p>所有的路由最终都将归入此路由对象中，此对象有四个方法：</p>
-<ul>
-<li><code>append</code>：追加一个新路由到路由树中。</li>
-<li><code>extend</code>：追加一个列表的新路由到路由树中。</li>
-<li><code>search</code>：为请求寻找一个合适的 <code>endpoint</code> 并返回路径参数。</li>
-<li><code>url_for</code>：通过路由名称与路径参数反向构建完整的 URL path。</li>
-</ul>
-<h2 id="dispatcher">Dispatcher</h2>
-<p><code>Dispatcher</code> 可以用于组合多个 ASGI 应用。以下为一个简单的用例，当一个新的请求 <code>/django/admin/</code> 到达 <code>app</code> 时，按照顺序依次调用 <code>django_app</code>、<code>other_django_app</code>，第一个非 404 的响应将会作为最后的结果返回给客户端。如果所有的 Application 都返回 404 响应且未读取请求体，则最终由 <code>application</code> 来处理此次请求；如果有任意一个 Application 读取了请求体且返回 404 响应，则会调用 <code>handle404</code> 返回响应（默认是一个空内容的 404 响应，你可以在参数里覆盖它）。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">a2wsgi</span> <span class="kn">import</span> <span class="n">WSGIMiddleware</span>
-<span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span><span class="p">,</span> <span class="n">Dispatcher</span>
-
-<span class="kn">from</span> <span class="nn">django_app_name.wsgi</span> <span class="kn">import</span> <span class="n">application</span> <span class="k">as</span> <span class="n">django_app</span>
-<span class="kn">from</span> <span class="nn">other_django_app_name.wsgi</span> <span class="kn">import</span> <span class="n">application</span> <span class="k">as</span> <span class="n">other_django_app</span>
-<span class="kn">from</span> <span class="nn">fastapi_app</span> <span class="kn">import</span> <span class="n">app</span> <span class="k">as</span> <span class="n">fastapi_app</span>
-
-<span class="n">application</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">Dispatcher</span><span class="p">(</span>
-    <span class="n">application</span><span class="p">,</span>
-    <span class="p">(</span><span class="s2">&quot;/django&quot;</span><span class="p">,</span> <span class="n">WSGIMiddleware</span><span class="p">(</span><span class="n">django_app</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;/django&quot;</span><span class="p">,</span> <span class="n">WSGIMiddleware</span><span class="p">(</span><span class="n">other_django_app</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;/some&quot;</span><span class="p">,</span> <span class="n">fastapi_app</span><span class="p">),</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<div class="admonition notice">
-<p class="admonition-title">Notice</p>
-<p>使用 <code>pip install a2wsgi</code> 安装 <code>a2wsgi</code>，可以使用 <code>a2wsgi.WSGIMiddleware</code> 将一个 <code>WSGI</code> 应用转换为 <code>ASGI</code> 应用。</p>
-</div>
                 
               
               
@@ -680,6 +556,10 @@
     
         <div class="version-select">
             <a href="/stable/application/">stable</a>
+        </div>
+    
+        <div class="version-select">
+            <a href="/0.16/application/">0.16</a>
         </div>
     
         <div class="version-select">

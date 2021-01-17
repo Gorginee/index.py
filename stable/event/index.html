@@ -384,62 +384,6 @@
   
 
     
-      
-      
-      
-
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" >
-      
-      <label class="md-nav__link" for="nav-11">
-        Configuration
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Configuration" data-md-level="1">
-        <label class="md-nav__title" for="nav-11">
-          <span class="md-nav__icon md-icon"></span>
-          Configuration
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../config/" class="md-nav__link">
-        Introduction
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../config/list/" class="md-nav__link">
-        Built-in List
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
   </ul>
 </nav>
                   </div>
@@ -488,10 +432,10 @@
                 
                   <h1>Lifespan</h1>
                 
-                <p>Index 允许注册若干个事件处理程序，以处理在应用程序启动之前或关闭时需要运行的代码。</p>
+                <p>Index-py 允许注册若干个事件处理程序，以处理在应用程序启动之前或关闭时需要运行的代码。</p>
 <ul>
-<li><code>on_startup</code>: Index 启动之前运行的函数</li>
-<li><code>on_shutdown</code>: Index 关闭之前运行的函数</li>
+<li><code>on_startup</code>: Index-py 启动之前运行的函数</li>
+<li><code>on_shutdown</code>: Index-py 关闭之前运行的函数</li>
 </ul>
 <h2 id="_1">注册事件</h2>
 <p>你可以用装饰器语法注册事件处理程序，注册普通函数或由 <code>async def</code> 定义的异步函数均可。</p>
@@ -511,6 +455,28 @@
 <span class="nd">@app</span><span class="o">.</span><span class="n">on_shutdown</span>
 <span class="k">def</span> <span class="nf">logger_on_shutdown</span><span class="p">():</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Called on shutdown&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>也可以在创建 <code>Index</code> 对象时作为参数传递，以下程序与上等价。</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;example&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">logger_on_startup</span><span class="p">():</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Called on startup&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">logger_on_shutdown</span><span class="p">():</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Called on shutdown&quot;</span><span class="p">)</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">(</span>
+    <span class="n">on_startup</span><span class="o">=</span><span class="p">[</span><span class="n">logger_on_startup</span><span class="p">],</span>
+    <span class="n">on_shutdown</span><span class="o">=</span><span class="p">[</span><span class="n">logger_on_shutdown</span><span class="p">],</span>
+<span class="p">)</span>
 </code></pre></div>
                 
               
@@ -603,6 +569,10 @@
     
         <div class="version-select">
             <a href="/stable/event/">stable</a>
+        </div>
+    
+        <div class="version-select">
+            <a href="/0.16/event/">0.16</a>
         </div>
     
         <div class="version-select">
