@@ -319,26 +319,12 @@
     显示 OpenAPI 文档
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    接口描述
-  </a>
-  
-    <nav class="md-nav" aria-label="接口描述">
+    <nav class="md-nav" aria-label="显示 OpenAPI 文档">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    描述请求参数
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    描述响应结果
+  <a href="#api-tags" class="md-nav__link">
+    API Tags
   </a>
   
 </li>
@@ -349,15 +335,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#openapi_1" class="md-nav__link">
-    描述额外的 OpenAPI 文档
+  <a href="#_1" class="md-nav__link">
+    接口描述
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#tags" class="md-nav__link">
-    Tags
+  <a href="#_2" class="md-nav__link">
+    标注请求参数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    描述响应结果
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openapi_1" class="md-nav__link">
+    描述额外的 OpenAPI 文档
   </a>
   
 </li>
@@ -427,26 +427,12 @@
     显示 OpenAPI 文档
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    接口描述
-  </a>
-  
-    <nav class="md-nav" aria-label="接口描述">
+    <nav class="md-nav" aria-label="显示 OpenAPI 文档">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    描述请求参数
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    描述响应结果
+  <a href="#api-tags" class="md-nav__link">
+    API Tags
   </a>
   
 </li>
@@ -457,15 +443,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#openapi_1" class="md-nav__link">
-    描述额外的 OpenAPI 文档
+  <a href="#_1" class="md-nav__link">
+    接口描述
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#tags" class="md-nav__link">
-    Tags
+  <a href="#_2" class="md-nav__link">
+    标注请求参数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    描述响应结果
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openapi_1" class="md-nav__link">
+    描述额外的 OpenAPI 文档
   </a>
   
 </li>
@@ -491,7 +491,7 @@
                 
                 <p>Index-py 使用 <a href="https://pydantic-docs.helpmanual.io/">pydantic</a> 用于更轻松的解析 HTTP 请求信息，并为之绑定了一套生成 OpenAPI 文档的程序。</p>
 <h2 id="openapi">显示 OpenAPI 文档</h2>
-<p>将 <code>indexpy.openapi.application.OpenAPI</code> 挂载进 Index-py 中。启动 index，访问你服务上 <code>/openapi/</code> 即可看到生成的文档。</p>
+<p>将 <code>indexpy.openapi.application.OpenAPI</code> 挂载进 Index-py 中。启动 index，访问你服务上 <code>/openapi/</code> 即可看到生成的文档。当然，如果你不需要生成文档，仅仅只需要自动校验参数功能，这一步可以跳过。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.routing</span> <span class="kn">import</span> <span class="n">SubRoutes</span>
 <span class="kn">from</span> <span class="nn">indexpy.openapi</span> <span class="kn">import</span> <span class="n">OpenAPI</span>
@@ -509,12 +509,33 @@
 
 <p>默认的文档模板使用 <a href="https://swagger.io/tools/swagger-ui/">swagger</a>，如果你更喜欢 <a href="https://github.com/Redocly/redoc">redoc</a> 的样式，可以通过更改 <code>template_name</code> 来达到目的，例如：<code>OpenAPI(..., template_name="redoc")</code>。</p>
 <p>不仅如此，你还可以通过使用 <code>template</code> 参数来控制显示自己的喜欢的任何模板，只需要把模板的完整内容作为字符串传给 <code>template</code> 参数即可。</p>
+<h3 id="api-tags">API Tags</h3>
+<p>OpenAPI 的 Tags 是一个有用的功能，在 Index-py 里，你可以通过如下方式来指定 URL 的分类标签。</p>
+<p><code>tags</code> 参数必须是一个 <code>dict</code> 类型，键为标签名。值需要包含 <code>description</code>，用于描述此标签；<code>paths</code> 是 URL 列表，如果 URL 包含路径参数，直接使用不带 <code>:type</code> 的字符串即可。</p>
+<div class="codehilite"><pre><span></span><code><span class="n">OpenAPI</span><span class="p">(</span>
+    <span class="s2">&quot;index.py example&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;just a example, power by index.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;v1&quot;</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;something&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;test over two tags in one path&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;/about/</span><span class="si">{username}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;/file&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">],</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;about&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;about page&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;/about/&quot;</span><span class="p">,</span> <span class="s2">&quot;/about/</span><span class="si">{username}</span><span class="s2">&quot;</span><span class="p">],</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</code></pre></div>
+
 <h2 id="_1">接口描述</h2>
-<p>对于所有可处理 HTTP 请求的方法，它们的 <code>__doc__</code> 都会用于生成 OpenAPI 文档。</p>
-<p>第一行将被当作概要描述，所以尽量简明扼要，不要太长。</p>
-<p>空一行之后，后续的文字都会被当作详细介绍，被安置在 OpenAPI 文档中。</p>
+<p>对于所有可处理 HTTP 请求的方法，它们的 <code>__doc__</code> 都会用于生成 OpenAPI 文档。第一行将被当作概要描述，所以尽量简明扼要，不要太长。空一行之后，后续的文字都会被当作详细介绍，被安置在 OpenAPI 文档中。</p>
 <p>例如：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    api summary</span>
 
@@ -522,10 +543,21 @@
 <span class="sd">    .........................................</span>
 <span class="sd">    .........................................</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">ClassHandler</span><span class="p">(</span><span class="n">HTTPView</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        api summary</span>
+
+<span class="sd">        api description..........................</span>
+<span class="sd">        .........................................</span>
+<span class="sd">        .........................................</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 </code></pre></div>
 
-<h3 id="_2">描述请求参数</h3>
-<p>对于所有可处理 HTTP 请求的方法，均可以接受五种参数：<code>Path</code>、<code>Body</code>、<code>Query</code>、<code>Header</code>、<code>Cookie</code>。对参数进行类型标注，就做到自动参数校验以及生成请求格式文档。例如：</p>
+<h2 id="_2">标注请求参数</h2>
+<p>先看一个最简单的例子，两个分页参数，首先通过 Type hint 标注它们都需要 <code>int</code> 类型，在给予它们 <code>Query(...)</code> 作为值，<code>Query</code> 代表它们将会从 <code>request.query_params</code> 中读取值，<code>...</code> 作为第一个参数，意味着它是一个必须项，也就是客户端请求该接口时必须携带类似于 <code>?page_num=1&amp;page_size=10</code> 的参数。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">Query</span>
 
 
@@ -551,7 +583,7 @@
     <span class="o">...</span>
 </code></pre></div>
 
-<h3 id="_3">描述响应结果</h3>
+<h2 id="_3">描述响应结果</h2>
 <p>为了描述不同状态码的响应结果，Index-py 使用装饰器描述，而不是类型注解。<code>describe_response</code> 接受五个参数，其中 <code>status</code> 为必需项，<code>description</code>、<code>content</code>、<code>headers</code> 和 <code>links</code> 为可选项，对应<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"> OpenAPI Specification </a>里的同名字段。</p>
 <p>其中，<code>content</code> 既可以使用类型对象或 <code>pydantic.BaseModel</code> 的派生子类描述响应，亦可以直接传递符合 OpenAPI 文档的 Dict（当你描述返回一个非 application/json 类型的响应时这很有用）。</p>
 <div class="admonition notice">
@@ -618,30 +650,6 @@
         <span class="o">...</span>
 
     <span class="k">return</span> <span class="n">judge</span>
-</code></pre></div>
-
-<h2 id="tags">Tags</h2>
-<p>OpenAPI 的 Tags 是一个有用的功能，在 Index-py 里，你可以通过如下方式来指定 URL 的分类标签。</p>
-<p><code>tags</code> 参数必须是一个 <code>dict</code> 类型，键为标签名。值需要包含 <code>description</code>，用于描述此标签；<code>paths</code> 是 URL 列表，如果 URL 包含路径参数，直接使用不带 <code>:type</code> 的字符串即可。</p>
-<div class="codehilite"><pre><span></span><code><span class="n">OpenAPI</span><span class="p">(</span>
-    <span class="s2">&quot;index.py example&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;just a example, power by index.py&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;v1&quot;</span><span class="p">,</span>
-    <span class="n">tags</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;something&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;test over two tags in one path&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;/about/&quot;</span><span class="p">,</span> <span class="s2">&quot;/file&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">],</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;about&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;about page&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;/about/&quot;</span><span class="p">,</span> <span class="s2">&quot;/about/me&quot;</span><span class="p">],</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;get/upload file api&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;/file&quot;</span><span class="p">],</span>
-        <span class="p">},</span>
-    <span class="p">},</span>
-<span class="p">)</span>
 </code></pre></div>
                 
               
