@@ -414,7 +414,7 @@
 </ul>
 <h2 id="_1">注册事件</h2>
 <p>你可以用装饰器语法注册事件处理程序，注册普通函数或由 <code>async def</code> 定义的异步函数均可。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 
@@ -431,9 +431,8 @@
 <span class="k">def</span> <span class="nf">logger_on_shutdown</span><span class="p">():</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Called on shutdown&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 <p>也可以在创建 <code>Index</code> 对象时作为参数传递，以下程序与上等价。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 

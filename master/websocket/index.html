@@ -575,7 +575,7 @@
 <p>在下文中，用于处理 WebSocket 请求的可调用对象被称为 WebSocket 处理器。</p>
 <h3 id="_1">函数处理器</h3>
 <p>函数接受一个位置参数 <code>websocket</code>，它是一个 <code>indexpy.websocket.request.WebSocket</code> 对象。在函数的开始，必须调用 <code>await websocket.accept()</code>，在函数结束必须调用 <code>await websocket.close(CLOSE_CODE)</code>。</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">simple_echo</span><span class="p">(</span><span class="n">websocket</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">simple_echo</span><span class="p">(</span><span class="n">websocket</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -584,7 +584,6 @@
     <span class="k">finally</span><span class="p">:</span>
         <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 </code></pre></div>
-
 <h3 id="_2">类处理器</h3>
 <p>与 HTTP 类处理器类似，WebSocket 类处理器需要从 <code>indexpy.websocket.SocketView</code> 继承而来。</p>
 <p>它有一个类属性：<code>encoding</code>，此属性有三个可用值——<code>"text"</code>、<code>"bytes"</code>、<code>"json"</code>，将决定接收到的 WebSocket 数据以何种编码被解析。默认为 <code>json</code>。</p>
@@ -650,7 +649,7 @@
 </div>
 <h3 id="state">State</h3>
 <p>某些情况下需要储存一些额外的自定义信息到 <code>request</code> 中，可以使用 <code>websocket.state</code> 用于存储。</p>
-<div class="codehilite"><pre><span></span><code><span class="n">websocket</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>  <span class="c1"># 写</span>
+<div class="highlight"><pre><span></span><code><span class="n">websocket</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>  <span class="c1"># 写</span>
 
 <span class="n">user_name</span> <span class="o">=</span> <span class="n">websocket</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">name</span>  <span class="c1"># 读</span>
 

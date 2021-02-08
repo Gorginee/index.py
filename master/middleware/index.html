@@ -560,7 +560,7 @@
 <h3 id="_1">基于函数的中间件</h3>
 <p>编写一个 HTTP 中间件十分简单，就像编写一个装饰器函数一样。</p>
 <p>第一层函数只有一个参数，就是被包裹的可调用对象。第二层函数仅接受一个参数 <code>requesst</code>，函数返回值将作为此次请求的响应结果。</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">middleware</span><span class="p">(</span><span class="n">endpoint</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">middleware</span><span class="p">(</span><span class="n">endpoint</span><span class="p">):</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
         <span class="o">...</span>
         <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">endpoint</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
@@ -568,7 +568,6 @@
         <span class="k">return</span> <span class="n">response</span>
     <span class="k">return</span> <span class="n">wrapper</span>
 </code></pre></div>
-
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p><code>endpoint</code> 是实际处理 HTTP 请求的可调用对象</p>
@@ -598,7 +597,7 @@
 <p class="admonition-title">Notice</p>
 <p>子中间件的执行顺序是从左到右。</p>
 </div>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">MiddlewareMixin</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">MiddlewareMixin</span>
 
 
 <span class="k">class</span> <span class="nc">ExampleChildMiddleware</span><span class="p">(</span><span class="n">MiddlewareMixin</span><span class="p">):</span>
@@ -620,18 +619,16 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;example base middleware response&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">response</span>
 </code></pre></div>
-
 <h2 id="websocket">WebSocket 中间件</h2>
 <h3 id="_3">基于函数的中间件</h3>
 <p>编写一个 WebSocket 中间件与编写一个 HTTP 中间件很相似，不同的是 <code>websocket</code> 对应的 <code>endpoint</code> 对象不会有返回值。中间件的第二层函数也不需要返回结果，任何返回结果都是无效的。</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">middleware</span><span class="p">(</span><span class="n">endpoint</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">middleware</span><span class="p">(</span><span class="n">endpoint</span><span class="p">):</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">websocket</span><span class="p">):</span>
         <span class="o">...</span>
         <span class="k">await</span> <span class="n">endpoint</span><span class="p">(</span><span class="n">websocket</span><span class="p">)</span>
         <span class="o">...</span>
     <span class="k">return</span> <span class="n">wrapper</span>
 </code></pre></div>
-
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p><code>endpoint</code> 是实际处理 WebSocket 请求的可调用对象</p>
@@ -653,16 +650,15 @@
 <p>在 Index-py 中，定义并使用 ASGI 中间件的方式有两种，一种是与 Starlette 相同的注册方式，将 ASGI 中间件注册给 Index-py 对象；另一种是将 ASGI 中间件注册给指定的 <a href="../route/#asgiroute"><code>ASGIRoute</code></a>。这两种 ASGI 中间件的定义方法不同，使用方法不同，作用范围也不同。</p>
 <h3 id="index-py-asgi">附加给 Index-py 对象的 ASGI 中间件</h3>
 <p>就像<a href="https://www.starlette.io/middleware/"> Starlette 文档</a>里的中间件一样，这一类的中间件定义，它的 <code>__init__</code> 签名必须为 <code>(self, app: ASGIApp, *args: Any, **kwargs: Any)</code>，<code>__call__</code> 必须是一个标准的 ASGI 接口。注册方式类似于如下代码：</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">starlette.middleware.gzip</span> <span class="kn">import</span> <span class="n">GZipMiddleware</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
 <span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">GZipMiddleware</span><span class="p">,</span> <span class="n">minimum_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </code></pre></div>
-
 <h3 id="asgi_1">附加到路由的 ASGI 中间件</h3>
 <p>这种方式就如同最上面所讲的，使用装饰器相同的编写方式。以下为一个简单的定义样例，注册方式请参考 <a href="../route/#_10">Routes 章节</a>。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.types</span> <span class="kn">import</span> <span class="n">ASGIApp</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.types</span> <span class="kn">import</span> <span class="n">ASGIApp</span>
 
 <span class="k">def</span> <span class="nf">middleware</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">):</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>

@@ -957,7 +957,7 @@
 <p>在下文中，用于处理 HTTP 请求的可调用对象被称为 HTTP 处理器。</p>
 <h3 id="_1">函数处理器</h3>
 <p>使用函数处理单一类型的请求是很简单的，它会接受一个位置参数 <code>request</code>，默认类型为 <code>indexpy.http.request.Request</code>。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
 
@@ -966,9 +966,8 @@
 <span class="k">async</span> <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">return</span> <span class="s2">&quot;hello&quot;</span>
 </code></pre></div>
-
 <p><code>@app.router.http</code> 装饰器将返回原始的函数，故而可以将同一个函数注册到多个路由下。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
 
@@ -980,7 +979,6 @@
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;hello </span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">path_params</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">return</span> <span class="s2">&quot;hello&quot;</span>
 </code></pre></div>
-
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>在函数处理器中不允许自行编写代码处理 <code>options</code> 方法，但拥有与类处理器相同的处理 <code>options</code> 的默认程序。</p>
@@ -988,7 +986,7 @@
 <h3 id="_2">类处理器</h3>
 <p>使用类处理多种请求十分简单。只需要继承 <code>indexpy.http.HTTPView</code> 并编写对应的方法，支持的方法有 <code>"get"</code>，<code>"post"</code>，<code>"put"</code>，<code>"patch"</code>，<code>"delete"</code>，<code>"head"</code>，<code>"options"</code>，<code>"trace"</code>。</p>
 <p>通过 <code>self.request</code> 可以读取此次请求的信息。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
@@ -1012,7 +1010,6 @@
     <span class="k">async</span> <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span>
 </code></pre></div>
-
 <h2 id="_3">获取请求值</h2>
 <p>以下是 <code>indexpy.http.request.Request</code> 对象的常用属性与方法。</p>
 <h3 id="method">Method</h3>
@@ -1064,14 +1061,13 @@
 </li>
 </ul>
 <p>你也可以使用 <code>async for</code> 语法将 <code>body</code> 作为一个 <code>bytes</code> 流进行读取：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="o">...</span>
     <span class="n">body</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
     <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">stream</span><span class="p">():</span>
         <span class="n">body</span> <span class="o">+=</span> <span class="n">chunk</span>
     <span class="o">...</span>
 </code></pre></div>
-
 <p>如果你直接使用了 <code>request.stream()</code> 去读取数据，那么请求体将不会缓存在内存中。其后任何对 <code>.body</code>/<code>.form</code>/<code>.json</code> 的调用都将抛出错误。</p>
 <p>在某些情况下，例如长轮询或流式响应，你可能需要确定客户端是否已断开连接。可以使用 <code>disconnected = await request.is_disconnected()</code> 确定此状态。</p>
 <h3 id="request-files">Request Files</h3>
@@ -1090,20 +1086,18 @@
 <li><code>async close()</code>: 关闭文件。</li>
 </ul>
 <p>下面是一个读取原始文件名称和内容的例子：</p>
-<div class="codehilite"><pre><span></span><code><span class="n">form</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span>
+<div class="highlight"><pre><span></span><code><span class="n">form</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span>
 <span class="n">filename</span> <span class="o">=</span> <span class="n">form</span><span class="p">[</span><span class="s2">&quot;upload_file&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span>
 <span class="n">contents</span> <span class="o">=</span> <span class="k">await</span> <span class="n">form</span><span class="p">[</span><span class="s2">&quot;upload_file&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </code></pre></div>
-
 <h3 id="state">State</h3>
 <p>某些情况下需要储存一些额外的自定义信息到 <code>request</code> 中，可以使用 <code>request.state</code> 用于存储。</p>
-<div class="codehilite"><pre><span></span><code><span class="n">request</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>  <span class="c1"># 写</span>
+<div class="highlight"><pre><span></span><code><span class="n">request</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>  <span class="c1"># 写</span>
 
 <span class="n">user_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">name</span>  <span class="c1"># 读</span>
 
 <span class="k">del</span> <span class="n">request</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">user</span>  <span class="c1"># 删</span>
 </code></pre></div>
-
 <h2 id="_4">返回响应值</h2>
 <p>对于任何正常处理的 HTTP 请求都必须返回一个 <code>indexpy.http.responses.Response</code> 对象或者是它的子类对象。</p>
 <p>在 <code>index.http.repsonses</code> 里内置的可用对象如下：</p>
@@ -1117,7 +1111,7 @@
 </ul>
 <p><code>Response</code> 将自动包含 Content-Length 标头。 它还将包含一个基于 media_type 的 Content-Type 标头，并为文本类型附加一个字符集。</p>
 <p>实例化 <code>Response</code> 后，可以通过将其作为 ASGI 应用程序实例进行调用来发送响应。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">Response</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">Response</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
@@ -1125,7 +1119,6 @@
     <span class="n">response</span> <span class="o">=</span> <span class="n">Response</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">,</span> <span class="n">media_type</span><span class="o">=</span><span class="s1">&#39;text/plain&#39;</span><span class="p">)</span>
     <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
 </code></pre></div>
-
 <h4 id="set-cookie">Set Cookie</h4>
 <p><code>Response</code> 提供 <code>set_cookie</code> 方法以允许你设置 cookies。</p>
 <p>签名：<code>Response.set_cookie(key, value="", max_age=None, expires=None, path="/", domain=None, secure=False, httponly=False, samesite="lax")</code></p>
@@ -1145,7 +1138,7 @@
 <p>签名: <code>Response.delete_cookie(key, path='/', domain=None)</code></p>
 <h3 id="htmlresponse">HTMLResponse</h3>
 <p>接受 <code>str</code> 或 <code>bytes</code> 并返回 HTML 响应。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">HTMLResponse</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">HTMLResponse</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
@@ -1153,10 +1146,9 @@
     <span class="n">response</span> <span class="o">=</span> <span class="n">HTMLResponse</span><span class="p">(</span><span class="s1">&#39;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello, world!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#39;</span><span class="p">)</span>
     <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
 </code></pre></div>
-
 <h3 id="plaintextresponse">PlainTextResponse</h3>
 <p>接受 <code>str</code> 或 <code>bytes</code> 并返回纯文本响应。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
@@ -1164,10 +1156,9 @@
     <span class="n">response</span> <span class="o">=</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
     <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
 </code></pre></div>
-
 <h3 id="jsonresponse">JSONResponse</h3>
 <p>接受一些数据并返回一个 <code>application/json</code> 编码的响应。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
@@ -1175,10 +1166,9 @@
     <span class="n">response</span> <span class="o">=</span> <span class="n">JSONResponse</span><span class="p">({</span><span class="s1">&#39;hello&#39;</span><span class="p">:</span> <span class="s1">&#39;world&#39;</span><span class="p">})</span>
     <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
 </code></pre></div>
-
 <h4 id="_5">自定义序列化方法</h4>
 <p>很多时候，Python 内置的 <code>json</code> 标准库无法满足实际项目的序列化需求，可以通过覆盖 <code>JSONResponse.json_convert</code> 来自定义序列化方法。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">decimal</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
 
@@ -1200,10 +1190,9 @@
 
 <span class="n">JSONResponse</span><span class="o">.</span><span class="n">json_convert</span> <span class="o">=</span> <span class="n">custom_convert</span>
 </code></pre></div>
-
 <h3 id="redirectresponse">RedirectResponse</h3>
 <p>返回 HTTP 重定向。默认情况下使用 307 状态代码。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span><span class="p">,</span> <span class="n">RedirectResponse</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span><span class="p">,</span> <span class="n">RedirectResponse</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
@@ -1214,10 +1203,9 @@
         <span class="n">response</span> <span class="o">=</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
     <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
 </code></pre></div>
-
 <h3 id="streamingresponse">StreamingResponse</h3>
 <p>接受一个异步生成器或普通生成器/迭代器，流式传输响应主体。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
 
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">StreamingResponse</span>
 
@@ -1236,7 +1224,6 @@
     <span class="n">response</span> <span class="o">=</span> <span class="n">StreamingResponse</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">media_type</span><span class="o">=</span><span class="s1">&#39;text/html&#39;</span><span class="p">)</span>
     <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
 </code></pre></div>
-
 <h3 id="fileresponse">FileResponse</h3>
 <p>异步传输文件作为响应。</p>
 <p>与其他响应类型相比，采用不同的参数进行实例化：</p>
@@ -1251,7 +1238,7 @@
 <p><code>TemplateResponse</code> 是 <code>app.templates.TemplateResponse</code> 的一个快捷方式。</p>
 <h4 id="jinja2">Jinja2 模板引擎</h4>
 <p>Index-py 内置了对 Jinja2 模板的支持，只要你安装了 <code>jinja2</code> 模块，就能从 <code>indexpy.http.templates</code> 中导出 <code>Jinja2Templates</code>。以下是一个简单的使用样例，访问 "/" 它将从项目根目录下的 templates 目录寻找 homepage.html 文件进行渲染。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.templates</span> <span class="kn">import</span> <span class="n">Jinja2Templates</span>
 
@@ -1262,7 +1249,6 @@
 <span class="k">async</span> <span class="k">def</span> <span class="nf">homepage</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;homepage.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">})</span>
 </code></pre></div>
-
 <p>如果你要使用某个模块下的指定文件夹中的模板文件，可以使用 <code>Jinja2Templates("module_name:dirname")</code>。你还可以传递多个目录让 Jinja2 按照顺序依次查找，直到找到第一个可用的模板，例如：<code>Jinja2Templates("templates", "module_name:dirname")</code>。</p>
 <h4 id="_6">其他模板引擎</h4>
 <p>通过继承 <code>indexpy.http.templates.BaseTemplates</code> 并实现 <code>TemplateResponse</code> 方法，你可以实现自己的模板引擎类。</p>
@@ -1270,7 +1256,7 @@
 <p>通过 <code>ServerSendEventResponse</code> 可以返回一个 <a href="https://developer.mozilla.org/zh-CN/docs/Server-sent_events/Using_server-sent_events">Server Sent Events</a> 响应，这是一种 HTTP 长连接响应，可应用于服务器实时推送数据到客户端等场景。</p>
 <p><code>ServerSendEventResponse</code> 除了可以接受诸如 <code>status_code</code>、<code>headers</code> 等常规参数外，还需要自行传入一个用于生成消息的异步生成器。传入的异步生成器 <code>yield</code> 的每一条消息都需要为合规的 Server-Sent Event 消息（<code>str</code> 类型），否则会出现不可预料的错误。</p>
 <p>如下是一个每隔一秒发送一条 hello 消息、一共发送一百零一条消息的样例。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
 
 <span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">EventResponse</span>
@@ -1288,7 +1274,6 @@
 
     <span class="k">return</span> <span class="n">EventResponse</span><span class="p">(</span><span class="n">message_gen</span><span class="p">())</span>
 </code></pre></div>
-
 <h3 id="_7">响应的简化写法</h3>
 <p>为了方便使用，Index-py 允许自定义一些函数来处理 <code>HTTP</code> 内返回的非 <code>Response</code> 对象。它的原理是拦截响应，通过响应值的类型来自动选择处理函数，把非 <code>Response</code> 对象转换为 <code>Response</code> 对象。</p>
 <div class="admonition tip">
@@ -1296,7 +1281,7 @@
 <p>如果需要手动把函数的返回值转换为 <code>Response</code> 对象，则可以使用 <code>indexpy.http.responses.convert</code>。</p>
 </div>
 <p>Index-py 内置了三个处理函数用于处理六种类型：</p>
-<div class="codehilite"><pre><span></span><code><span class="nd">@automatic</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@automatic</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
 <span class="k">def</span> <span class="nf">_none</span><span class="p">(</span><span class="n">ret</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">NoReturn</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
         <span class="s2">&quot;Get &#39;None&#39;. Maybe you need to add a return statement to the function.&quot;</span>
@@ -1321,9 +1306,8 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
 </code></pre></div>
-
 <p>正是有了这些内置处理函数，下面这段代码将被正确解析为一个 JSON 响应。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
 
 
 <span class="k">class</span> <span class="nc">HTTP</span><span class="p">(</span><span class="n">HTTPView</span><span class="p">):</span>
@@ -1331,9 +1315,8 @@
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span><span class="p">}</span>
 </code></pre></div>
-
 <p>同样的，你也可以自定义响应值的简化写法以统一项目的响应规范（哪怕有 <code>TypedDict</code>，Python 的 <code>Dict</code> 约束依旧很弱，但 dataclass 则有效得多），例如：</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">asdict</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">asdict</span>
 
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">automatic</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">JSONResponse</span>
 
@@ -1349,9 +1332,8 @@
 <span class="k">def</span> <span class="nf">_error_json</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="n">Error</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">400</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">asdict</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">status</span><span class="p">)</span>
 </code></pre></div>
-
 <p>或者你想覆盖默认的 <code>tuple</code>/<code>list</code>/<code>dict</code> 所对应的 <code>JSONResponse</code>：</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">automatic</span><span class="p">,</span> <span class="n">Response</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">automatic</span><span class="p">,</span> <span class="n">Response</span>
 
 <span class="o">...</span>
 
@@ -1362,11 +1344,10 @@
 <span class="k">def</span> <span class="nf">_more_json</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">CustomizeJSONResponse</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
 </code></pre></div>
-
 <h3 id="http_1">HTTP 异常</h3>
 <p>其参数签名是：<code>HTTPException(status_code: int, content: typing.Any = None, headers: dict = None, media_type: str = None)</code></p>
 <p>你可以通过抛出 <code>HTTPException</code> 来返回一个 HTTP 响应（不必担心它变成一个真正的异常抛出，Index-py 知道该如何将它变成一个普通的响应对象）。如果你没有给出 <code>content</code>，那么它将使用 Python 标准库中的 <code>http.HTTPStatus(status_code).description</code> 作为值。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPException</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPException</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">exc</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
@@ -1374,11 +1355,10 @@
     <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
     <span class="o">...</span>
 </code></pre></div>
-
 <h2 id="_8">自定义异常处理</h2>
 <p>对于一些故意抛出的异常，Index-py 提供了方法进行统一处理。</p>
 <p>你可以捕捉指定的 HTTP 状态码，那么在应对包含对应 HTTP 状态码的 <code>HTTPException</code> 异常时，Index-py 会使用你定义的函数而不是默认行为。你也可以捕捉其他继承自 <code>Exception</code> 的异常，通过自定义函数，返回指定的内容给客户端。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">Request</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">Response</span><span class="p">,</span> <span class="n">PlainTextResponse</span>
 
@@ -1394,9 +1374,8 @@
 <span class="k">def</span> <span class="nf">value_error</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="s2">&quot;Something went wrong with the server.&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 </code></pre></div>
-
 <p>除了装饰器注册，你同样可以使用列表式的注册方式，下例与上例等价：</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">Request</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">Response</span><span class="p">,</span> <span class="n">PlainTextResponse</span>
 
@@ -1414,7 +1393,6 @@
     <span class="ne">ValueError</span><span class="p">:</span> <span class="n">value_error</span><span class="p">,</span>
 <span class="p">})</span>
 </code></pre></div>
-
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>你不能在这里使用 <code>request.body</code>/<code>.form</code>/<code>.json</code>/<code>.data</code> 等方法读取请求的内容。</p>

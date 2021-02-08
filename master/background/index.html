@@ -440,7 +440,7 @@
 <h2 id="_1">单一后台任务</h2>
 <p>很多情况下我们需要这样一种后台任务——在响应结束后，执行某种耗时的 IO 操作。</p>
 <p><code>indexpy.http.BackgroundTask</code> 是一个神奇的包装类，它可以帮助你把函数提交到此次 http 响应结束后执行——如果响应未完成就失败了，后台任务将不会执行。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">Background</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
 
@@ -459,10 +459,9 @@
     <span class="n">task</span> <span class="o">=</span> <span class="n">BackgroundTask</span><span class="p">(</span><span class="n">send_welcome_email</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">({</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Signup successful&#39;</span><span class="p">},</span> <span class="n">background</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
 </code></pre></div>
-
 <h2 id="_2">多后台任务</h2>
 <p>如果需要顺序的执行多个后台任务(执行顺序由添加顺序决定，先添加、先执行)，需要使用 <code>BackgroundTasks</code> 代替 <code>BackgroundTask</code>，它们的工作原理是一样的。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">BackgroundTasks</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
 
@@ -486,7 +485,6 @@
     <span class="n">tasks</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="n">send_admin_notification</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">({</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Signup successful&#39;</span><span class="p">},</span> <span class="n">background</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
 </code></pre></div>
-
 <h2 id="_3">同步任务</h2>
 <p>以上的用法都仅限于使用 <code>async def</code> 定义的异步函数，如果你想在后台运行同步 IO 的任务函数，你应该使用 <a href="https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor"><code>asyncio.loop.run_in_executor</code></a> 对同步函数进行改造，让它变成一个异步函数。</p>
 <div class="admonition tip">

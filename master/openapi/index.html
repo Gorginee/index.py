@@ -492,7 +492,7 @@
                 <p>Index-py 使用 <a href="https://pydantic-docs.helpmanual.io/">pydantic</a> 用于更轻松的解析 HTTP 请求信息，并为之绑定了一套生成 OpenAPI 文档的程序。</p>
 <h2 id="openapi">显示 OpenAPI 文档</h2>
 <p>将 <code>indexpy.openapi.application.OpenAPI</code> 挂载进 Index-py 中。启动 index，访问你服务上 <code>/openapi/</code> 即可看到生成的文档。当然，如果你不需要生成文档，仅仅只需要自动校验参数功能，这一步可以跳过。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.routing</span> <span class="kn">import</span> <span class="n">SubRoutes</span>
 <span class="kn">from</span> <span class="nn">indexpy.openapi</span> <span class="kn">import</span> <span class="n">OpenAPI</span>
 
@@ -506,13 +506,12 @@
     <span class="p">)</span>
 <span class="p">)</span>
 </code></pre></div>
-
 <p>默认的文档模板使用 <a href="https://swagger.io/tools/swagger-ui/">swagger</a>，如果你更喜欢 <a href="https://github.com/Redocly/redoc">redoc</a> 的样式，可以通过更改 <code>template_name</code> 来达到目的，例如：<code>OpenAPI(..., template_name="redoc")</code>。</p>
 <p>不仅如此，你还可以通过使用 <code>template</code> 参数来控制显示自己的喜欢的任何模板，只需要把模板的完整内容作为字符串传给 <code>template</code> 参数即可。</p>
 <h3 id="api-tags">API Tags</h3>
 <p>OpenAPI 的 Tags 是一个有用的功能，在 Index-py 里，你可以通过如下方式来指定 URL 的分类标签。</p>
 <p><code>tags</code> 参数必须是一个 <code>dict</code> 类型，键为标签名。值需要包含 <code>description</code>，用于描述此标签；<code>paths</code> 是 URL 列表，如果 URL 包含路径参数，直接使用不带 <code>:type</code> 的字符串即可。</p>
-<div class="codehilite"><pre><span></span><code><span class="n">OpenAPI</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="n">OpenAPI</span><span class="p">(</span>
     <span class="s2">&quot;index.py example&quot;</span><span class="p">,</span>
     <span class="s2">&quot;just a example, power by index.py&quot;</span><span class="p">,</span>
     <span class="s2">&quot;v1&quot;</span><span class="p">,</span>
@@ -528,11 +527,10 @@
     <span class="p">},</span>
 <span class="p">)</span>
 </code></pre></div>
-
 <h2 id="_1">接口描述</h2>
 <p>对于所有可处理 HTTP 请求的方法，它们的 <code>__doc__</code> 都会用于生成 OpenAPI 文档。第一行将被当作概要描述，所以尽量简明扼要，不要太长。空一行之后，后续的文字都会被当作详细介绍，被安置在 OpenAPI 文档中。</p>
 <p>例如：</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
@@ -555,10 +553,9 @@
 <span class="sd">        .........................................</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 </code></pre></div>
-
 <h2 id="_2">标注请求参数</h2>
 <p>先看一个最简单的例子，两个分页参数，首先通过 Type hint 标注它们都需要 <code>int</code> 类型，在给予它们 <code>Query(...)</code> 作为值，<code>Query</code> 代表它们将会从 <code>request.query_params</code> 中读取值，<code>...</code> 作为第一个参数，意味着它是一个必须项，也就是客户端请求该接口时必须携带类似于 <code>?page_num=1&amp;page_size=10</code> 的参数。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">Query</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">Query</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">getlist</span><span class="p">(</span>
@@ -568,9 +565,8 @@
 <span class="p">):</span>
     <span class="o">...</span>
 </code></pre></div>
-
 <p>而你也可以通过使用继承自 <code>pydantic.BaseModel</code> 的类作为类型注解来描述同一类型的全部参数，通过类的继承可以做到复用参数。<code>Exclusive</code> 接受五种请求参数的全小写字符串作为参数，分别代表对应五种请求参数的独占模式。下例与上例是等价的。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 <span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">Exclusive</span>
 
 
@@ -582,7 +578,6 @@
 <span class="k">async</span> <span class="k">def</span> <span class="nf">getlist</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="n">PageQuery</span> <span class="o">=</span> <span class="n">Exclusive</span><span class="p">(</span><span class="s2">&quot;query&quot;</span><span class="p">)):</span>
     <span class="o">...</span>
 </code></pre></div>
-
 <h2 id="_3">描述响应结果</h2>
 <p>为了描述不同状态码的响应结果，Index-py 使用装饰器描述，而不是类型注解。<code>describe_response</code> 接受五个参数，其中 <code>status</code> 为必需项，<code>description</code>、<code>content</code>、<code>headers</code> 和 <code>links</code> 为可选项，对应<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"> OpenAPI Specification </a>里的同名字段。</p>
 <p>其中，<code>content</code> 既可以使用类型对象或 <code>pydantic.BaseModel</code> 的派生子类描述响应，亦可以直接传递符合 OpenAPI 文档的 Dict（当你描述返回一个非 application/json 类型的响应时这很有用）。</p>
@@ -590,7 +585,7 @@
 <p class="admonition-title">Notice</p>
 <p>如果 <code>description</code> 的值为默认的 <code>""</code>，则会使用 <code>http</code> 标准库中的 <code>HTTPStatus(status).description</code> 作为描述。</p>
 </div>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">http</span> <span class="kn">import</span> <span class="n">HTTPStatus</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">http</span> <span class="kn">import</span> <span class="n">HTTPStatus</span>
 
 <span class="kn">from</span> <span class="nn">indexpy.openapi</span> <span class="kn">import</span> <span class="n">describe_response</span>
 
@@ -601,9 +596,8 @@
 <span class="sd">    .................</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </code></pre></div>
-
 <p>除了 <code>describe_response</code> 描述单个响应状态码以外，你还可以使用 <code>describe_responses</code> 对状态码批量的描述。字典以 <code>status</code> 为键，以 OpenAPI Response Object 的四个属性作为可选的值（其中 <code>description</code> 为必选）。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.openapi</span> <span class="kn">import</span> <span class="n">describe_responses</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.openapi</span> <span class="kn">import</span> <span class="n">describe_responses</span>
 
 <span class="n">RESPONSES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="mi">404</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Item not found&quot;</span><span class="p">},</span>
@@ -619,7 +613,6 @@
 <span class="sd">    .................</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </code></pre></div>
-
 <div class="admonition notice">
 <p class="admonition-title">Notice</p>
 <p>此功能到目前为止，除生成OpenAPI文档的作用外，无其他作用。<strong>未来或许会增加 mock 功能。</strong></p>
@@ -630,7 +623,7 @@
 <p class="admonition-title">Tip</p>
 <p><code>describe_extra_docs</code> 增加的内容，不仅限于 <code>parameters</code>，任何描述都会被合并进原本的文档里。具体的字段可参考 <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">OpenAPI Specification</a>。</p>
 </div>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">judge_jwt</span><span class="p">(</span><span class="n">endpoint</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">judge_jwt</span><span class="p">(</span><span class="n">endpoint</span><span class="p">):</span>
     <span class="n">describe_extra_docs</span><span class="p">(</span>
         <span class="n">endpoint</span><span class="p">,</span>
         <span class="p">{</span>
