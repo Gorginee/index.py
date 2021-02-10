@@ -1355,6 +1355,15 @@
     <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
     <span class="o">...</span>
 </code></pre></div>
+<p>有时候也许你想返回更多的信息，可以像使用 <code>Response</code> 一样为它传递 <code>content</code>、<code>headers</code> 或 <code>media_type</code> 参数来控制最终实际的响应对象。下面是一个简单的例子。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPException</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">exc</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="mi">405</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Allow&quot;</span><span class="p">:</span> <span class="s2">&quot;HEAD,GET,POST&quot;</span><span class="p">})</span>
+    <span class="o">...</span>
+</code></pre></div>
 <h2 id="_8">自定义异常处理</h2>
 <p>对于一些故意抛出的异常，Index-py 提供了方法进行统一处理。</p>
 <p>你可以捕捉指定的 HTTP 状态码，那么在应对包含对应 HTTP 状态码的 <code>HTTPException</code> 异常时，Index-py 会使用你定义的函数而不是默认行为。你也可以捕捉其他继承自 <code>Exception</code> 的异常，通过自定义函数，返回指定的内容给客户端。</p>
